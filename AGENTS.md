@@ -129,7 +129,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (16-jul, actualizado tras Fase 1 · demo EN CONSTRUCCION en `app/`)
+### 🚦 EMPIEZA POR AQUI (17-jul, actualizado tras Fase 2 · demo EN CONSTRUCCION en `app/`)
 
 **Construir la demo. Directamente. Sin pipeline de Hermes.**
 
@@ -141,21 +141,42 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   olvidaba el plugin `@tailwindcss/vite` en vite.config.ts (añadido) y faltaba
   `src/vite-env.d.ts` con tipos de `vite-plugin-pwa/client` (creado). Stubs de
   WineList/WineDetail/Header en su sitio.
-- **Fase 2 (SIGUIENTE): tipos + 19 vinos.** Delegacion a hy3 preparada: **Edu la lanza
-  con prefijo `!`** (el clasificador de permisos bloquea `--yolo` lanzado por Fable; via
-  `!` la corre Edu y R9 queda perfecto). El comando exacto quedo en la conversacion del
-  16-jul; si se perdio, reconstruirlo: copiar SPEC §2+§7 y DISENO_REFERENCIAS a `app/`,
-  contrato = types/index.ts + data/wines.ts, 19 vinos exactos, SIN price, borrar copias al
-  acabar. Tras hy3: Fable verifica (compila, 19 vinos, 0 price) y sigue Fase 3.
-- **Leccion delegacion (16-jul):** command-code sin `--yolo` NO escribe archivos; con
-  `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 = lanzarlas Edu con
-  `!`, o Fable escribe directo si son <10 archivos pequeños ya especificados.
+- **Fase 2 ✅ HECHA Y VERIFICADA (17-jul, Fable):** `app/src/types/index.ts` (interface `Wine`
+  + `WineryName` + `WineGroup`, exacta a SPEC §2) y `app/src/data/wines.ts` (19 vinos: 8
+  Andrade + 11 Sauci, literales de SPEC §7). La escribio Fable directo — el comando delegado
+  a hyttp daba error y con 2 archivos ya especificados aplica la excepcion "<10 archivos
+  pequeños". **Doble verificacion:** (a) Fable: `npm run build` verde (incluye `tsc -b`) +
+  `npx tsc --noEmit` limpio + greps (19 ids, 0 `price`); (b) **revisor hy3 read-only**
+  (comparacion mecanica campo a campo vs SPEC §2/§7) → **VEREDICTO: OK, cero discrepancias**.
+  Criterio aplicado sobre la SPEC: tildes correctas en "Docenañero" (la SPEC las perdia) y
+  `grape: 'Múltiples variedades'` en el Vermut (lo indicaba la nota de §7.2).
+- **Fase 3 (SIGUIENTE):** layout y routing — logo real + fallback. Es criterio visual, mala
+  candidata para hy3 → la hace Fable. **Fase 4** (componentes) SI esta muy especificada en
+  SPEC §3 → ahi delegar el grueso a hy3.
+- **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
+  archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
+  lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
+  especificados. **PERO los revisores read-only NO tienen este problema**: no escriben, no
+  necesitan `--yolo`, y Fable los lanza sin friccion. Revisar con hy3 es gratis → hacerlo
+  siempre que haya que comparar codigo contra una spec.
+- **Skill `command-code`: ARREGLADA (17-jul).** Vivia solo en
+  `Promethe-os\.claude\skills\command-code\` → desde este proyecto daba "Unknown skill"
+  siempre. Ahora hay una **junction** en `C:\Users\eduar\.claude\skills\command-code`
+  apuntando ahi: se carga en TODOS los proyectos y sigue habiendo una sola fuente. Si algun
+  dia se mueve/renombra `Promethe-os`, la junction se rompe → recrearla.
+- **Enmienda de iniciativa (Edu, 17-jul):** **hy3 es gratis → Fable lo lanza a voluntad**,
+  sin preguntar, si la tarea es mecanica y verificable. **deepseek-v4-pro (4x, gasto real)
+  → Fable lo PROPONE de oficio** cuando vea oportunidad de ahorrar limite de Pro, con los $
+  reales delante. Detalle en la propia skill. **`command-code` NO se allowlista**: la
+  allowlist filtra por prefijo de comando, no por modelo, y allowlistarla desbloquearia
+  tambien deepseek sin gate — el clic de aprobacion es el precio de mantener cerrado el
+  gate del gasto real.
 
   | Fase | Estado |
   |---|---|
   | 1 · Scaffolding — Vite + React + TS + Tailwind v4 + PWA | ✅ **HECHA** (16-jul) |
-  | 2 · Capa de datos — tipos + 19 vinos | **`ready`** ← Edu lanza hy3 con `!` |
-  | 3 · Layout y routing — Header + React Router | todo (Header/routing basicos ya en Fase 1; falta logo real + fallback) |
+  | 2 · Capa de datos — tipos + 19 vinos | ✅ **HECHA** (17-jul, Fable + revisor hy3 OK) |
+  | 3 · Layout y routing — Header + React Router | **`ready`** ← SIGUIENTE (Header/routing basicos ya en Fase 1; falta logo real + fallback) |
   | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | todo |
   | 5 · Diseno visual y responsive — paleta, espaciado | todo |
   | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
@@ -187,8 +208,9 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 **Historial de sesiones: vive en `git log` y en los docs de referencia, no aqui.**
 Claves aun operativas de sesiones pasadas:
 
-- **Sabado 18-jul:** Edu ve al cunado en persona y queria ensenar la demo. La demo esta
-  en construccion (Fase 1 ✅). Decidir si acelerar fases 2-6 antes del sabado → **[EDU]**.
+- **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo. La demo
+  esta en construccion (Fases 1-2 ✅; faltan 3-6: no hay UI usable todavia). Decidir si
+  acelerar fases 3-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
 - Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
@@ -200,7 +222,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. Implementar demo fases 2-6 (flujo del 🚦: hy3 via `!` de Edu o Fable directo + verificacion Fable)
+1. Implementar demo fases 3-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
