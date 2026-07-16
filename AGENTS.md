@@ -46,6 +46,22 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 | **Inventario (Pregunta A)** | **CERRADA: MVP sin stock** — el informe de inventario es listado de la carta (sin cantidades). La version con stock queda para fase posterior si la app funciona. |
 | **Precios en la app (16-jul, Edu)** | **CERRADA: la app NO muestra precios en ninguna pantalla.** El cliente es distribuidor — sus tarifas son precio de compra B2B confidencial y cada restaurante vende al precio que quiere. La app sustituye los cursos de sumiller a camareros, NO es una carta comercial. Carta con precios/vinos propios del restaurante = fase futura. Aplicado en: entregable, DESGLOSE §2bis, demo (contrato/spec/plan — campo `price` eliminado, la UVA pasa a ser el dato destacado de la ficha). |
 
+### Contexto relacional (aclarado por Edu, 16-jul — mandatorio para tono y enfoque)
+
+- El **cunado NO es un cliente adversarial**: quiere ayudar a Edu a arrancar. Trabaja
+  para **la socia, que es quien pone el dinero y decide**. La venta real es
+  cunado -> socia: el es el *champion interno*, no el comprador.
+- **Enfoque:** honesto y cercano con el cunado (Edu puede admitir que es su primer
+  encargo real y que en lo legal va con gestoria). El guion de defensa (§7 de
+  DESGLOSE_PRECIOS_D1.md) se le entrega como **municion para que el justifique el
+  precio ante su socia**, no como escudo contra sus preguntas.
+- **Limite:** el modelo interno de horas y la ganancia de productividad por IA no se
+  comparten ni con el (criterio de pricing cerrado — es margen, no escandallo).
+  Documentos escritos = voz profesional, porque llegan a la socia.
+- **No bajar precio por cercania:** la horquilla sale de partidas reales con suelos.
+  La proteccion honesta al cliente ya esta en la garantia de 30 dias y el soporte de
+  la Opcion B, no en descuentos.
+
 ### Aclaracion del cunado sobre diseno
 
 - Quiere saber el **rango de precio primero** antes de invertir en diseno (mockups de la disenadora, etc.)
@@ -71,7 +87,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 | **Mini-admin catalogo maestro** | MANTENER y AMPLIADO | Depende de C.2: potencialmente 2 superficies de admin (empresa + restaurante); cuantas en v1 lo decide la respuesta a Pregunta D |
 | **v1: empresa gestiona todo** (catalogo + asignacion de cartas), restaurantes solo consultan | RECOMENDACION FABLE (C.2) | Si el cunado confirma que restaurantes exigen autonomia desde dia 1, se reabre y el admin crece |
 | **Arquitectura multi-tenant** desde el minuto uno | CIERRE | — |
-| **Horquilla con supuestos explicitos y exclusiones** (nunca cifra cerrada) | MANTENER | La cifra final la decide Edu |
+| **Horquilla** -> **CIFRA CERRADA con opciones transparentes** (decision Edu 16-jul: A 4.600 / B 5.050, opciones −200/−200 en papel) | CAMBIADO por Edu | Si el alcance crece antes de firmar, se recalcula la cifra, no se vuelve al rango |
 
 ---
 
@@ -92,17 +108,44 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## CRITERIOS DE PRICING (NO re-litigar)
 
-- Horquilla con supuestos explicitos y exclusiones, nunca cifra cerrada. La cifra final la decide Edu.
+- ~~Horquilla con supuestos explicitos y exclusiones, nunca cifra cerrada~~ **SUPERSEDIDO
+  16-jul por decision de Edu: CIFRA CERRADA con opciones transparentes.** A = 4.600 e ·
+  B = 5.050 e; dos opciones que restan nombradas en el papel (−200 disenadora, −200 CSV
+  aplazado; minimo 4.200, sobre el suelo de 3.900). La cifra final la decide Edu.
 - La ganancia de productividad por IA es **margen de Edu, no descuento del cliente** — no revelar multiplicadores tipo "2 semanas con IA vs 4 meses solo".
 - Sub de Claude (si aplica) va como overhead dentro de la horquilla y/o dentro de la cuota mensual de soporte, sin linea propia.
 - Arquitectura barata de operar (sin coste recurrente alto), coherente con "sin mantenimiento".
 - Carga inicial de fichas de vino (datos estructurados con variedad de uva, de la que vive el motor de recomendaciones) es coste de proyecto a dimensionar explicitamente.
+- **Transparencia de precio (regla de Edu, 16-jul):** nada de rangos. Precio = cifra
+  cerrada; todo factor que la mueva Y dependa de una decision del cliente va NOMBRADO
+  en el papel con su efecto en euros (hoy: −200 disenadora, −200 CSV). Si alguna vez
+  hiciera falta un rango, lleva su porque escrito al lado. Durante el proyecto rige
+  "sin sorpresas": cualquier coste extra se comunica ANTES con su importe y lo decide
+  el cliente (clausula en Condiciones del presupuesto .md y .html). Los drivers
+  internos de estimacion (DESGLOSE §5) son municion verbal, no papel — no son
+  decisiones del cliente.
 
 ---
 
 ## RETOMAR AQUI
 
-**Ultima sesion:** 16-jul (Fable, sesion de pricing con Edu). **3 resultados:**
+**Ultima sesion:** 16-jul noche (Fable + Edu, verificacion y ajuste del entregable).
+**4 resultados:**
+1. **Verificado el trabajo previo del worker (DeepSeek/Hermes):** limpieza del informe
+   cumple los 3 greps del contrato; entregable sin rastro IA; demo sin campo price;
+   git limpio. Sin desviaciones.
+2. **Contexto relacional registrado** (seccion nueva arriba): cunado = aliado/champion
+   interno, la socia decide y paga; guion §7 = municion PARA el cunado.
+3. **Decision de Edu: CIFRA CERRADA, no horquilla.** A = 4.600 e · B = 5.050 e, con 2
+   opciones que restan nombradas en el papel (−200 disenadora / −200 CSV aplazado;
+   minimo 4.200 > suelo 3.900). Campos de ficha cerrados por alcance. Aplicado en
+   PRESUPUESTO .md + .html (verificado: 0 rangos, suma = 4.600) y anotado como
+   actualizacion en DESGLOSE_PRECIOS_D1.md. Clausula "sin sorpresas" anadida a
+   Condiciones (coste extra se aprueba antes, no se factura nada fuera de lo aceptado).
+4. Pendiente [EDU] sin cambios: placeholders nombre/empresa/fecha + leer §6-§7 del
+   desglose (leyendolos ahora como argumentario para el cunado, no como defensa).
+
+**Sesion anterior:** 16-jul (Fable, sesion de pricing con Edu). **3 resultados:**
 1. **D.1 CERRADA** — cifras ratificadas por Edu: A 3.900-5.200 · B 4.350-5.650
    (soporte 450e = 4h/mes × 3 meses). Desglose por partidas, modelo interno de horas,
    suelos (A 3.900 / B 4.350), palancas de recorte, drivers min/max por partida y
@@ -164,7 +207,7 @@ La review externa se hizo en sesion `20260715_224156_f96415` el 15-jul 22:41. SP
 
 Documento INFORME_TECNICO_PROFESIONAL.md: 950 lineas, 0 refs Claude, tono profesional.
 Decisiones cerradas anteriores: E.3 (B), D.2 (codigo), P6 (espanol), B.2 (PDF admin-side), anticipo 30/70, hosting Opcion C.
-Horquilla RATIFICADA 16-jul (D.1 cerrada): A 3.900-5.200€ · B 4.350-5.650€ (C retirada por D.2). HORQUILLA.md queda como historico supersedido; vigente: docs/SPECS/DESGLOSE_PRECIOS_D1.md. **Presupuesto entregable GENERADO:** docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md + .html imprimible (faltan por rellenar: nombre, empresa, fecha).
+Horquilla RATIFICADA 16-jul (D.1 cerrada): A 3.900-5.200€ · B 4.350-5.650€ (C retirada por D.2). **Superseder posterior (16-jul noche): Edu decide CIFRA CERRADA A 4.600 / B 5.050 con opciones −200/−200 — ver nota de actualizacion en DESGLOSE_PRECIOS_D1.md.** HORQUILLA.md queda como historico supersedido; vigente: docs/SPECS/DESGLOSE_PRECIOS_D1.md. **Presupuesto entregable GENERADO:** docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md + .html imprimible (faltan por rellenar: nombre, empresa, fecha).
 
 ### Pendientes
 

@@ -4,6 +4,16 @@
 > Cifras propuestas por Fable con aritmética verificada. **La cifra final la decide Edu.**
 > Sustituye los rangos de HORQUILLA.md cuando Edu los ratifique.
 
+> ⚠️ **ACTUALIZACIÓN 16-jul (posterior, ratificada por Edu): la propuesta ya NO se
+> presenta como rango.** Edu decidió cifra cerrada con opciones transparentes:
+> **A = 4.600 €** (bloques: 1.250 / 1.150 / 950 con CSV / 300 / 550 / 400) ·
+> **B = 5.050 €** (A + 450 de soporte). Dos opciones que restan, nombradas en el papel:
+> −200 € si la diseñadora aporta diseños (bloque 5 → 350), −200 € si el CSV se aplaza
+> (bloque 3 → 750). Mínimo configurable: 4.200 € — por encima del suelo A (3.900 ✓).
+> Campos de ficha: cerrados por alcance ("los listados; adicionales aparte"), ya no son
+> driver de precio. Los rangos de este documento quedan como **modelo interno** (drivers
+> §5 = munición verbal); los suelos de §6 siguen vigentes para negociar.
+
 ---
 
 ## 1. Principio del desglose: partidas, no horas

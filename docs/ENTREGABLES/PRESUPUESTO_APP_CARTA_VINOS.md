@@ -38,31 +38,35 @@ funciones que no aporten. Todo lo que quedaba fuera de eso está en el apartado
 
 | Bloque | Importe |
 |--------|---------|
-| 1. Base de la aplicación | 1.100 – 1.400 € |
-| 2. Funciones de camarero | 1.000 – 1.300 € |
-| 3. Panel de administración | 800 – 1.100 € |
-| 4. Informe de inventario | 250 – 350 € |
-| 5. Diseño y adaptación visual | 400 – 600 € |
-| 6. Puesta en marcha | 350 – 450 € |
-| **Total desarrollo** | **3.900 – 5.200 €** |
+| 1. Base de la aplicación | 1.250 € |
+| 2. Funciones de camarero | 1.150 € |
+| 3. Panel de administración (incluye carga desde Excel/CSV) | 950 € |
+| 4. Informe de inventario | 300 € |
+| 5. Diseño y adaptación visual | 550 € |
+| 6. Puesta en marcha | 400 € |
+| **Total desarrollo** | **4.600 €** |
 
-Los importes se presentan como horquilla porque hay tres cosas que aún dependen de
-vosotros; en cuanto estén decididas, la cifra se cierra en el contrato:
+Hay dos decisiones que son vuestras y, si las tomáis, restan del total — para que
+sepáis de antemano qué cuesta cada cosa y decidáis vosotros:
 
-- Si vuestra diseñadora aporta los diseños de pantalla, el bloque 5 va al mínimo.
-- La lista definitiva de campos de la ficha de vino (una lista cerrada va al mínimo).
-- Si la carga desde Excel/CSV se deja para más adelante, el bloque 3 baja unos 200 €.
+- Si vuestra diseñadora aporta los diseños de pantalla, el bloque 5 baja **200 €**
+  (de 550 a 350 €).
+- Si la carga desde Excel/CSV se deja para más adelante, el bloque 3 baja **200 €**
+  (de 950 a 750 €; los vinos se darían de alta uno a uno desde el panel).
+
+La ficha de vino incluye los campos indicados en "Qué incluye". Si más adelante
+quisierais campos adicionales, se presupuestan aparte y se aprueban antes de hacerlos.
 
 Precios sin IVA (21 % aparte).
 
 ## Dos modalidades
 
-### Opción A — Llave en mano · 3.900 – 5.200 €
+### Opción A — Llave en mano · 4.600 €
 
 Pagáis el desarrollo y recibís la aplicación funcionando. Cualquier cambio o añadido
 posterior se presupuesta aparte en su momento.
 
-### Opción B — Llave en mano + 3 meses de cambios menores · 4.350 – 5.650 € *(recomendada)*
+### Opción B — Llave en mano + 3 meses de cambios menores · 5.050 € *(recomendada)*
 
 Todo lo de la Opción A más **3 meses de cambios menores desde la entrega, hasta 4
 horas al mes** (450 € en total, 150 €/mes). Cubre los ajustes que siempre aparecen
@@ -105,8 +109,11 @@ Queda fuera de esta versión y se presupuestaría aparte si algún día interesa
   día. El coste de alojamiento lo pagáis directamente al proveedor y es de entre 0 y
   10 €/mes con el uso previsto. La aplicación es vuestra y no depende de mí para
   seguir funcionando.
-- **Cifra cerrada:** el contrato fijará el importe definitivo dentro de la horquilla,
-  una vez resueltos los tres puntos del apartado "Presupuesto".
+- **Cifra cerrada:** el importe del contrato es el total de arriba, ajustado
+  únicamente con las dos decisiones del apartado "Presupuesto", que son vuestras.
+- **Sin sorpresas:** si durante el proyecto surge algo que suponga un coste adicional,
+  os lo comunico antes de hacerlo, con su importe, y decidís vosotros si se hace, se
+  aplaza o se descarta. No se factura nada fuera de lo aceptado.
 
 ---
 
