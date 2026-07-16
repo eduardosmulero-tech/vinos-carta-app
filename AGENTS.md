@@ -44,6 +44,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 | Interlocutores confirmados | Cunado + socia |
 | **Gestion de cartas (Pregunta D)** | **CERRADA: la empresa de vinos gestiona** el catalogo y asigna las cartas a cada restaurante. Los restaurantes solo consultan. Coincide con recomendacion Fable C.2. |
 | **Inventario (Pregunta A)** | **CERRADA: MVP sin stock** — el informe de inventario es listado de la carta (sin cantidades). La version con stock queda para fase posterior si la app funciona. |
+| **Precios en la app (16-jul, Edu)** | **CERRADA: la app NO muestra precios en ninguna pantalla.** El cliente es distribuidor — sus tarifas son precio de compra B2B confidencial y cada restaurante vende al precio que quiere. La app sustituye los cursos de sumiller a camareros, NO es una carta comercial. Carta con precios/vinos propios del restaurante = fase futura. Aplicado en: entregable, DESGLOSE §2bis, demo (contrato/spec/plan — campo `price` eliminado, la UVA pasa a ser el dato destacado de la ficha). |
 
 ### Aclaracion del cunado sobre diseno
 
@@ -101,7 +102,40 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-**Ultima sesion:** 16-jul (Fable). **Auditoría completa del encargo de Sonnet ENTREGADA:**
+**Ultima sesion:** 16-jul (Fable, sesion de pricing con Edu). **3 resultados:**
+1. **D.1 CERRADA** — cifras ratificadas por Edu: A 3.900-5.200 · B 4.350-5.650
+   (soporte 450e = 4h/mes × 3 meses). Desglose por partidas, modelo interno de horas,
+   suelos (A 3.900 / B 4.350), palancas de recorte, drivers min/max por partida y
+   guion de defensa (FAQ + respuesta a "¿usas IA?" + regla anti-quedarse-en-blanco):
+   `docs/SPECS/DESGLOSE_PRECIOS_D1.md`. Edu debe leerse el §6-§7 antes de presentar.
+2. **Presupuesto entregable GENERADO** (#8 cerrado): `docs/ENTREGABLES/
+   PRESUPUESTO_APP_CARTA_VINOS.md` + `.html` imprimible a PDF. Falta [EDU]: rellenar
+   nombre/empresa/fecha.
+3. **Decision nueva: SIN PRECIOS en la app** (ver tabla Cerrado) — aplicada en
+   entregable, desglose y demo (contrato/spec/plan: campo `price` eliminado, la UVA
+   pasa a ser el dato destacado). Evitado: la demo iba a mostrar tarifas B2B
+   confidenciales del distribuidor. Reencuadre de venta: "formacion de sumiller en el
+   bolsillo del camarero", no "carta digital".
+
+**Sesion anterior:** 16-jul noche (Sonnet, sesion interactiva con Edu). **Cola D.1-D.6
+respondida 1 a 1 con Edu:**
+
+| # | Resultado |
+|---|-----------|
+| D.1 (cifras horquilla + precio soporte B) | **CERRADA (16-jul, ratificada por Edu).** Cifras finales: A 3.900-5.200 · B 4.350-5.650 (soporte 450e = hasta 4h/mes × 3 meses, 37,5e/h). Suelos de negociacion: A 3.900 / B 4.350 — por debajo se quita alcance, no precio (palancas en §6 del desglose). Desglose + guion de defensa: `docs/SPECS/DESGLOSE_PRECIOS_D1.md`. Antecedente: Sonnet a esfuerzo medio fallo la aritmetica precio+horas; no reabrir cifras con Sonnet sin verificacion explicita. |
+| D.2 | CERRADA: Opcion B confirmada como recomendada, Opcion C retirada de la propuesta (sustituible por bolsa de horas puntual futura) |
+| D.3 | CERRADA: garantia de 30 dias de correccion de errores sin coste anadida a la Opcion A |
+| D.4 | HECHO: `git init` local ejecutado, commit inicial `1db306d` (docs/, demo/, assets/, AGENTS.md, CLAUDE.md, .hermes/desktop-attachments/) |
+| D.5 | CERRADA: la ratificacion de la Pregunta D del 15-jul fue conversacion real con el cunado (no cierre interno) — confirma que restaurantes solo consultan y ademas aclara que el inventariado queda "a medio plazo" (coherente con MVP sin stock ya cerrado). La pregunta 1 de B.3 NO hace falta repreguntarla. |
+| D.6 | En marcha: cita con gestoria programada para la semana del 20-jul (no bloquea nada ahora) |
+
+**Nota de contexto:** Edu ve a su cunado en persona el sabado 18-jul (reunion familiar) y
+queria aprovechar para ensenar la demo, pero la demo AUN NO esta implementada (solo
+contrato/spec/plan aprobados — ver pendientes #4 y #5 abajo). Edu decidio no resolver
+este cruce de tiempos en la sesion del 16-jul; sigue abierto para la proxima sesion si
+quiere acelerar antes del sabado o dejarlo para mas adelante.
+
+**Sesion anterior:** 16-jul (Fable). **Auditoría completa del encargo de Sonnet ENTREGADA:**
 `docs/REVIEWS/AUDITORIA_FABLE_RESPUESTA_2026-07-16.md` (veredictos idea/planes/legal +
 **cola de decisiones D.1–D.6 para Edu** — leer eso primero) y
 `docs/SPECS/CONSULTA_GESTORIA.md` (notas limpias para la gestoría, regla 4bis, listas
@@ -130,19 +164,20 @@ La review externa se hizo en sesion `20260715_224156_f96415` el 15-jul 22:41. SP
 
 Documento INFORME_TECNICO_PROFESIONAL.md: 950 lineas, 0 refs Claude, tono profesional.
 Decisiones cerradas anteriores: E.3 (B), D.2 (codigo), P6 (espanol), B.2 (PDF admin-side), anticipo 30/70, hosting Opcion C.
-Horquilla en docs/SPECS/HORQUILLA.md (A: 3.150-5.300€ · B: 3.450-5.900€ · C: 2.650-4.300€ + 25-50€/mes). Edu decide cifras.
+Horquilla RATIFICADA 16-jul (D.1 cerrada): A 3.900-5.200€ · B 4.350-5.650€ (C retirada por D.2). HORQUILLA.md queda como historico supersedido; vigente: docs/SPECS/DESGLOSE_PRECIOS_D1.md. **Presupuesto entregable GENERADO:** docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md + .html imprimible (faltan por rellenar: nombre, empresa, fecha).
 
 ### Pendientes
 
 1. ~~**Ejecutar limpieza del INFORME_TECNICO_PROFESIONAL.md**~~ ✅ Completado
 2. ~~**REVISAR demo SPEC + PLAN con reviewer externo**~~ ✅ Completado (sesion 22:41, hy3)
-3. **Responder cola de decisiones D.1–D.6** de `docs/REVIEWS/AUDITORIA_FABLE_RESPUESTA_2026-07-16.md` → **[EDU — SIGUIENTE]**
-4. Migrar PLAN_DEMO_V1.md a pipeline Kanban (crear tarjetas Kanban con 7 campos, ciclo `advance_workflow_phase` → `confirm_advance` → worker → reviewer con `estado_reviewer`)
+3. ~~**Responder cola de decisiones D.1–D.6**~~ ✅ D.2-D.6 cerradas/en marcha 16-jul noche. D.1 (cifras) queda **[PENDIENTE — EDU + FABLE, con datos reales]**
+4. Migrar PLAN_DEMO_V1.md a pipeline Kanban (crear tarjetas Kanban con 7 campos, ciclo `advance_workflow_phase` → `confirm_advance` → worker → reviewer con `estado_reviewer`) → **[SIGUIENTE]**
 5. Ejecutar implementacion de la demo (6 fases via Kanban, worker + reviewer) → **[TRAS #4]**
-6. Consulta con gestor llevando `docs/SPECS/CONSULTA_GESTORIA.md` (D.6 — antes de la propuesta, obligatoria antes de la 1ª factura) → **[EDU]**
-7. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[SONNET/HERMES, tras D.2-D.3]**
-8. Generar presupuesto final con cifras cerradas → **[EDU]**
-9. Presentar al cunado: horquilla + demo + Opcion B (+ preguntas B.3 de la auditoria)
+6. Consulta con gestor llevando `docs/SPECS/CONSULTA_GESTORIA.md` (D.6 — programada semana del 20-jul, antes de la propuesta y de la 1ª factura) → **[EDU, en marcha]**
+7. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[SONNET/HERMES, tras D.2-D.3 — ya cerradas, desbloqueado]**
+8. ~~Generar presupuesto final con cifras cerradas~~ ✅ HECHO (16-jul, Fable): `docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md` + `.html` imprimible. **Solo falta [EDU]: rellenar nombre/empresa/fecha e imprimir a PDF, y leer el guion de defensa (§7 de DESGLOSE_PRECIOS_D1.md) antes de presentar**
+9. Presentar al cunado: presupuesto (entregable de #8) + demo + Opcion B (+ preguntas B.3 de la auditoria, salvo la pregunta 1 que ya no hace falta por D.5; la pregunta sobre precios quedo resuelta el 16-jul: SIN precios, ver tabla Cerrado)
+10. Decidir que hacer con la visita del sabado 18-jul (demo aun no lista) → **[EDU, abierto]**
 
 ### Documentos de referencia
 
@@ -151,7 +186,9 @@ Horquilla en docs/SPECS/HORQUILLA.md (A: 3.150-5.300€ · B: 3.450-5.900€ · 
 | `docs/INFORMES/INFORME_TECNICO_PROFESIONAL.md` | ✅ **Completado.** 27 decisiones documentadas. 950 líneas, tono profesional, sin refs a Claude/IA. |
 | `docs/INFORMES/INFORME_AUDITABLE_v4.md` | **Cerrado (v4).** Informe para auditoria externa con 3 rondas de correcciones aplicadas. Contiene las 25 decisiones en formato tabla. |
 | `docs/SPECS/DECISIONES.md` | Registro de 25 decisiones con contexto, alternativas, tripwires (523 lineas). Algunas desactualizadas respecto a v4. |
-| `docs/SPECS/HORQUILLA.md` | 3 opciones de presupuesto con rangos sugeridos (A: 3.150-5.300€ · B: 3.450-5.900€ · C: 2.650-4.300€ + 25-50€/mes). Edu pone cifras definitivas. |
+| `docs/SPECS/HORQUILLA.md` | ⚠️ Supersedido (D.1). Historico de las 3 opciones originales. Vigente: DESGLOSE_PRECIOS_D1.md |
+| `docs/SPECS/DESGLOSE_PRECIOS_D1.md` | ✅ Cifras ratificadas por Edu (A 3.900-5.200 · B 4.350-5.650), modelo interno de horas, suelos, palancas de recorte, guion de defensa (FAQ §7) |
+| `docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md` + `.html` | ✅ **Presupuesto final entregable al cliente** (cero rastro IA, voz de Edu). Pendiente: rellenar nombre/empresa/fecha |
 | `docs/SPECS/MARCO_LEGAL.md` | Analisis legal: 036, IRPF 7%, tripwire RETA. ⚠️ Su §4 (N2→RETA) es regla de negocio heredada de Pepito, no norma — ver auditoria Fable 16-jul |
 | `docs/REVIEWS/AUDITORIA_FABLE_RESPUESTA_2026-07-16.md` | ✅ Auditoria Fable: veredictos idea/planes/legal, cola D.1-D.6 para Edu, preguntas para el cunado |
 | `docs/SPECS/CONSULTA_GESTORIA.md` | Notas limpias (voz de Edu, regla 4bis) para la consulta con la gestoria |

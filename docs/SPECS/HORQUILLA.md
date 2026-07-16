@@ -1,5 +1,13 @@
 # Propuesta de presupuesto — vinos-carta-app
 
+> ⚠️ **SUPERSEDIDO (16-jul-2026, D.1 cerrada).** Las cifras de este documento fueron
+> sustituidas por las ratificadas por Edu: **A 3.900-5.200 € · B 4.350-5.650 €
+> (soporte 450 €, hasta 4 h/mes × 3 meses) · Opción C retirada (D.2)**.
+> Desglose y justificación: `docs/SPECS/DESGLOSE_PRECIOS_D1.md`.
+> Entregable final: `docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md` (+ .html imprimible).
+> Se conserva como histórico; las definiciones de "cambio menor" y las exclusiones
+> siguen vigentes y están recogidas en el entregable.
+
 > Documento interno para que Edu fije las cifras de cada opción.
 > Exclusiones comunes a las 3 opciones al final.
 

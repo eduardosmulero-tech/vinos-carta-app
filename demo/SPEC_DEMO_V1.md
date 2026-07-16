@@ -82,7 +82,6 @@ export interface Wine {
   grape: string;
   region: string;
   alcohol: number;
-  price: number;
   volume: string;
   description: string;
   image?: string;
@@ -98,7 +97,6 @@ export interface Wine {
 | `grape`     | `string` | ✅          | Variedad de uva (ej: "Zalema", "Chardonnay")             |
 | `region`    | `string` | ✅          | Denominación de Origen / procedencia                     |
 | `alcohol`   | `number` | ✅          | Graduación alcohólica en % (ej: 10.5)                    |
-| `price`     | `number` | ✅          | Precio en euros (ej: 8.50)                               |
 | `volume`    | `string` | ✅          | Formato / capacidad (ej: "75cl")                         |
 | `description` | `string` | ✅        | Notas de cata / descripción comercial (2-3 frases)       |
 | `image`     | `string` | ❌          | Ruta a imagen relativa a `/public/` (opcional en demo)   |
@@ -185,7 +183,7 @@ interface WineCardProps {
 1. **Nombre** del vino (bold, texto oscuro `#232421`)
 2. **Bodega** (texto secundario, gris suave o burgundy claro)
 3. **Tipo** de vino (badge / etiqueta pequeña)
-4. **Precio** formateado: `"XX,XX €"`
+4. **Uva** (variedad, ej: "Zalema") — el dato clave para el camarero
 5. Botón / enlace **"Ver más"** → navega a `/wine/:id`
 
 **Diseño:**
@@ -223,8 +221,8 @@ interface WineCardProps {
 | Sección | Contenido |
 |---------|-----------|
 | Cabecera | Nombre del vino (grande, bold), bodega debajo |
-| Meta | Tipo, uva, región, volumen |
-| Precio | Destacado, grande, color burgundy |
+| Meta | Tipo, región, volumen |
+| Uva | Destacada, grande, color burgundy — es el dato del que vive la recomendación |
 | Graduación | Indicador visual (ej: "10.5% vol") |
 | Descripción | Párrafo de notas de cata |
 | Navegación | Botón "← Volver a la carta" (link a `/`) |
@@ -251,7 +249,7 @@ interface SimilarWinesProps {
 - Si no hay similares: no renderiza nada (ni siquiera el título de la sección).
 
 **Título de sección:** "Vinos similares"
-**Cada mini-tarjeta:** nombre, bodega, precio, enlace a detalle.
+**Cada mini-tarjeta:** nombre, bodega, uva, enlace a detalle.
 **Estilo:** mismo que WineCard pero más compacto (horizontal o grid denso de 2-4 columnas).
 
 ---
@@ -288,7 +286,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 | Token CSS           | HEX       | RGB              | Uso                                                |
 |---------------------|-----------|------------------|----------------------------------------------------|
 | `--color-bg`        | `#f2ebe5` | 242, 235, 229    | Fondo de pantalla, fondo de tarjetas secundario    |
-| `--color-primary`   | `#73232d` | 115, 35, 45      | Header, botones, badges, precio destacado          |
+| `--color-primary`   | `#73232d` | 115, 35, 45      | Header, botones, badges, uva destacada             |
 | `--color-primary-dk`| `#6e1428` | 110, 20, 40      | Hover de botones, variante oscura                  |
 | `--color-text`      | `#232421` | 35, 36, 33       | Texto principal, cuerpo                            |
 | `--color-white`     | `#ffffff` | 255, 255, 255    | Fondos de tarjetas, contraste sobre primary        |
@@ -474,34 +472,34 @@ Exporta por defecto un `const wines: Wine[]` con exactamente 19 entradas, ordena
 
 ### 7.1 Bodegas Andrade (8 vinos)
 
-| # | id | name | type | grape | alcohol | price | volume |
-|---|-----|------|------|-------|---------|-------|--------|
-| 1 | `niebla` | Niebla | Blanco Frizzante Semidulce | Zalema | 10.5 | 8.50 | "75cl" |
-| 2 | `senorio-de-andrade` | Señorío de Andrade | Blanco Joven Semidulce | Chardonnay | 11.0 | 9.00 | "75cl" |
-| 3 | `castillo-de-andrade` | Castillo de Andrade | Blanco Joven Seco | Sauvignon Blanc | 12.0 | 9.50 | "75cl" |
-| 4 | `fino-palmarejo` | Fino Palmarejo | Fino en Rama | Zalema | 15.0 | 12.00 | "75cl" |
-| 5 | `docenanero-cream` | Docenanero Cream | Generoso de Licor | Zalema + PX | 18.0 | 15.00 | "75cl" |
-| 6 | `docenanero-oloroso` | Docenanero Oloroso | Generoso de Licor | Zalema | 18.0 | 15.00 | "75cl" |
-| 7 | `naranja-andrade` | Naranja Andrade | Generoso Dulce | Zalema | 15.0 | 14.00 | "75cl" |
-| 8 | `pedro-ximenez-1985` | Pedro Ximénez 1985 | Generoso Dulce | Pedro Ximénez | 15.0 | 28.00 | "75cl" |
+| # | id | name | type | grape | alcohol | volume |
+|---|-----|------|------|-------|---------|--------|
+| 1 | `niebla` | Niebla | Blanco Frizzante Semidulce | Zalema | 10.5 | "75cl" |
+| 2 | `senorio-de-andrade` | Señorío de Andrade | Blanco Joven Semidulce | Chardonnay | 11.0 | "75cl" |
+| 3 | `castillo-de-andrade` | Castillo de Andrade | Blanco Joven Seco | Sauvignon Blanc | 12.0 | "75cl" |
+| 4 | `fino-palmarejo` | Fino Palmarejo | Fino en Rama | Zalema | 15.0 | "75cl" |
+| 5 | `docenanero-cream` | Docenanero Cream | Generoso de Licor | Zalema + PX | 18.0 | "75cl" |
+| 6 | `docenanero-oloroso` | Docenanero Oloroso | Generoso de Licor | Zalema | 18.0 | "75cl" |
+| 7 | `naranja-andrade` | Naranja Andrade | Generoso Dulce | Zalema | 15.0 | "75cl" |
+| 8 | `pedro-ximenez-1985` | Pedro Ximénez 1985 | Generoso Dulce | Pedro Ximénez | 15.0 | "75cl" |
 
 **Región para todos Bodegas Andrade:** "D.O. Condado de Huelva"
 
 ### 7.2 Bodegas Sauci (11 vinos)
 
-| # | id | name | type | grape | alcohol | price | volume |
-|---|-----|------|------|-------|---------|-------|--------|
-| 9  | `blanco-seco-sauci` | Blanco Seco Sauci | Blanco Seco | Zalema | 12.0 | 3.65 | "75cl" |
-| 10 | `blanco-semidulce-sauci` | Blanco Semidulce Sauci | Blanco Semidulce | Zalema | 11.5 | 4.25 | "75cl" |
-| 11 | `tinto-crianza-sauci` | Tinto Crianza Sauci | Tinto Crianza | Syrah | 13.5 | 6.10 | "75cl" |
-| 12 | `fino-espinapura` | Fino Espinapura | Fino | Zalema | 15.0 | 4.95 | "75cl" |
-| 13 | `fino-cruzado` | Fino Cruzado | Fino Cruzado | Zalema | 15.5 | 6.45 | "75cl" |
-| 14 | `oloroso-riodiel` | Oloroso Riodiel | Oloroso | Zalema | 18.0 | 6.65 | "75cl" |
-| 15 | `cream-sauci` | Cream Sauci | Cream | Zalema + PX | 17.0 | 7.45 | "75cl" |
-| 16 | `dulce-sauci` | Dulce Sauci | Dulce | Pedro Ximénez | 15.0 | 5.70 | "75cl" |
-| 17 | `palo-cortado-sauci` | Palo Cortado Sauci | Palo Cortado | Zalema | 19.0 | 19.00 | "75cl" |
-| 18 | `vino-naranja-s-naranja` | Vino Naranja S' Naranja | Naranja | Zalema | 15.0 | 8.00 | "50cl" |
-| 19 | `vermut-s-vermouth` | Vermut S' Vermouth | Vermut | — | 15.0 | 5.45 | "75cl" |
+| # | id | name | type | grape | alcohol | volume |
+|---|-----|------|------|-------|---------|--------|
+| 9  | `blanco-seco-sauci` | Blanco Seco Sauci | Blanco Seco | Zalema | 12.0 | "75cl" |
+| 10 | `blanco-semidulce-sauci` | Blanco Semidulce Sauci | Blanco Semidulce | Zalema | 11.5 | "75cl" |
+| 11 | `tinto-crianza-sauci` | Tinto Crianza Sauci | Tinto Crianza | Syrah | 13.5 | "75cl" |
+| 12 | `fino-espinapura` | Fino Espinapura | Fino | Zalema | 15.0 | "75cl" |
+| 13 | `fino-cruzado` | Fino Cruzado | Fino Cruzado | Zalema | 15.5 | "75cl" |
+| 14 | `oloroso-riodiel` | Oloroso Riodiel | Oloroso | Zalema | 18.0 | "75cl" |
+| 15 | `cream-sauci` | Cream Sauci | Cream | Zalema + PX | 17.0 | "75cl" |
+| 16 | `dulce-sauci` | Dulce Sauci | Dulce | Pedro Ximénez | 15.0 | "75cl" |
+| 17 | `palo-cortado-sauci` | Palo Cortado Sauci | Palo Cortado | Zalema | 19.0 | "75cl" |
+| 18 | `vino-naranja-s-naranja` | Vino Naranja S' Naranja | Naranja | Zalema | 15.0 | "50cl" |
+| 19 | `vermut-s-vermouth` | Vermut S' Vermouth | Vermut | — | 15.0 | "75cl" |
 
 **Región para todos Bodegas Sauci:** "D.O. Condado de Huelva"
 
@@ -520,7 +518,6 @@ Cada vino incluirá una `description` de 1-3 frases con notas de cata y perfil o
   grape: 'Zalema',
   region: 'D.O. Condado de Huelva',
   alcohol: 10.5,
-  price: 8.50,
   volume: '75cl',
   description: 'Vino blanco con aguja (frizzante) de la variedad autóctona Zalema. '
     + 'En nariz es fresco con notas de fruta blanca y cítricos. En boca resulta '

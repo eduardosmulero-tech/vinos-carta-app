@@ -117,7 +117,7 @@ src/types/
 
 **WineCard (4.2):**
 - Props: `{ wine: Wine }`
-- Muestra: nombre (bold), bodega, tipo (badge), precio (XX,XX €)
+- Muestra: nombre (bold), bodega, tipo (badge), uva (variedad)
 - Clickable → navega a `/wine/:id` (usar `<Link>` o `useNavigate`)
 - Fondo blanco, shadow-sm, border-radius
 - Hover: sombra más pronunciada (SPEC §3.5)
@@ -132,7 +132,7 @@ src/types/
 **WineDetail (4.4):**
 - Lee `id` de `useParams()`, busca en `wines`
 - No encontrado: mensaje + "← Volver a la carta"
-- Encontrado: cabecera (nombre, bodega) → meta (tipo, uva, región, volumen) → precio destacado → graduación → descripción → botón volver (SPEC §3.7)
+- Encontrado: cabecera (nombre, bodega) → meta (tipo, región, volumen) → uva destacada → graduación → descripción → botón volver (SPEC §3.7)
 - Desktop: 2 columnas (datos | descripción). Móvil: 1 columna
 
 **SimilarWines (4.5):**
@@ -162,7 +162,7 @@ src/types/
 - Ajustar padding responsive: `px-4` móvil, `px-8` tablet, `px-16` desktop
 - Header: altura `h-14` móvil, `h-18` desktop. Sticky `top-0 z-10`
 - Botones: min 44×44px táctil, bg-primary + hover bg-primary-dk
-- Precio destacado en burgundy `text-primary` con tamaño mayor (`text-2xl` o `text-3xl`)
+- Uva destacada en burgundy `text-primary` con tamaño mayor (`text-2xl` o `text-3xl`)
 - Tarjetas: shadow-sm, hover shadow-md, transiciones suaves
 - Tipografía: system-ui, pesos 400/600/700
 
@@ -170,7 +170,7 @@ src/types/
 - [ ] 375px viewport: 1 columna, texto legible, botones táctiles
 - [ ] 768px viewport: 2 columnas grid
 - [ ] 1024px viewport: 3 columnas grid, detail en 2 columnas
-- [ ] Colores de marca visibles en header, botones, badges, precios
+- [ ] Colores de marca visibles en header, botones, badges, uva destacada
 
 ---
 

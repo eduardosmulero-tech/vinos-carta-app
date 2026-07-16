@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presupuesto — Aplicación de carta de vinos</title>
+<style>
+  :root {
+    --burgundy: #73232d;
+    --cream: #f2ebe5;
+    --ink: #2b2b2b;
+    --muted: #6b6259;
+    --line: #ddd3c8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 40px 64px;
+  }
+  header {
+    border-bottom: 3px solid var(--burgundy);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+  header h1 {
+    font-size: 26px;
+    color: var(--burgundy);
+    font-weight: normal;
+    letter-spacing: 0.3px;
+  }
+  header .subtitle {
+    color: var(--muted);
+    margin-top: 4px;
+    font-size: 15px;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 16px;
+    margin: 18px 0 0;
+    font-size: 13.5px;
+  }
+  .meta dt { color: var(--muted); }
+  .meta dd { font-weight: bold; }
+  h2 {
+    font-size: 17px;
+    color: var(--burgundy);
+    margin: 30px 0 10px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  p { margin-bottom: 10px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 14px;
+  }
+  th {
+    text-align: left;
+    background: var(--cream);
+    color: var(--burgundy);
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--burgundy);
+    font-size: 13px;
+  }
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  tr.total td {
+    font-weight: bold;
+    background: var(--cream);
+    border-bottom: none;
+  }
+  ul { margin: 4px 0 12px 22px; }
+  li { margin-bottom: 4px; }
+  .option {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--burgundy);
+    padding: 14px 18px;
+    margin: 12px 0;
+    break-inside: avoid;
+  }
+  .option h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .option h3 .price { color: var(--burgundy); }
+  .option .tag {
+    display: inline-block;
+    background: var(--burgundy);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 6px;
+    letter-spacing: 0.5px;
+    font-family: system-ui, sans-serif;
+  }
+  .note {
+    background: var(--cream);
+    padding: 12px 16px;
+    font-size: 13.5px;
+    margin: 12px 0;
+  }
+  footer {
+    margin-top: 36px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  @media print {
+    body { font-size: 12.5px; }
+    .page { padding: 0; max-width: none; }
+    h2 { margin-top: 20px; }
+    .option { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>Presupuesto — Aplicación de carta de vinos</h1>
+  <div class="subtitle">Consulta de carta para camareros · panel de gestión para la empresa</div>
+  <dl class="meta">
+    <dt>Preparado por</dt><dd>[Nombre completo]</dd>
+    <dt>Para</dt><dd>[Nombre de la empresa]</dd>
+    <dt>Fecha</dt><dd>[Fecha]</dd>
+    <dt>Validez</dt><dd>30 días</dd>
+  </dl>
+</header>
+
+<h2>Qué se propone</h2>
+<p>Una aplicación para que los camareros de vuestros restaurantes clientes consulten
+los vinos de su restaurante desde la PDA o cualquier móvil: buscador, ficha completa
+de cada vino y recomendaciones de alternativas parecidas. Es una herramienta de
+conocimiento del producto — pone en el bolsillo del camarero lo que hoy cubre la
+formación presencial — y por eso <b>no muestra precios de venta</b>: cada restaurante
+cobra lo suyo y eso queda fuera de la aplicación. Vosotros gestionáis la selección de
+cada restaurante desde un panel de administración propio; los restaurantes solo
+consultan.</p>
+<p>El criterio que ha guiado el planteamiento es el que me disteis al principio: una
+herramienta útil para los camareros y fácil de usar para los restaurantes, sin
+funciones que no aporten. Lo que quedaba fuera de eso está en «Qué no incluye»,
+presupuestable más adelante si algún día hace falta.</p>
+
+<h2>Qué incluye</h2>
+<table>
+  <tr><th style="width:30%">Bloque</th><th>Descripción</th></tr>
+  <tr><td><b>1. Base de la aplicación</b></td><td>Aplicación web que se instala como una app en cualquier PDA o móvil con navegador. Un acceso por restaurante: cada restaurante ve únicamente su carta. La carta se puede seguir consultando aunque falle el wifi.</td></tr>
+  <tr><td><b>2. Funciones de camarero</b></td><td>Buscador de vinos de la carta. Ficha completa: bodega, tipo, variedad de uva, denominación de origen, graduación y notas de cata. Recomendaciones de vinos parecidos por uva y tipo, para ofrecer alternativa con criterio.</td></tr>
+  <tr><td><b>3. Panel de administración</b></td><td>Alta y edición de vinos del catálogo, asignación de la carta de cada restaurante y carga de vinos desde Excel/CSV.</td></tr>
+  <tr><td><b>4. Informe de inventario</b></td><td>Listado de la carta de cada restaurante, exportable a PDF desde el panel.</td></tr>
+  <tr><td><b>5. Diseño y adaptación visual</b></td><td>Aplicación de vuestra identidad (logo y colores) e interfaz pensada para consulta rápida en sala.</td></tr>
+  <tr><td><b>6. Puesta en marcha</b></td><td>Carga inicial de las fichas de vino actuales (Bodegas Andrade y Bodegas Sauci), publicación en producción y pruebas reales en las PDA de un restaurante.</td></tr>
+</table>
+
+<h2>Presupuesto</h2>
+<table>
+  <tr><th>Bloque</th><th class="num">Importe</th></tr>
+  <tr><td>1. Base de la aplicación</td><td class="num">1.100 – 1.400 €</td></tr>
+  <tr><td>2. Funciones de camarero</td><td class="num">1.000 – 1.300 €</td></tr>
+  <tr><td>3. Panel de administración</td><td class="num">800 – 1.100 €</td></tr>
+  <tr><td>4. Informe de inventario</td><td class="num">250 – 350 €</td></tr>
+  <tr><td>5. Diseño y adaptación visual</td><td class="num">400 – 600 €</td></tr>
+  <tr><td>6. Puesta en marcha</td><td class="num">350 – 450 €</td></tr>
+  <tr class="total"><td>Total desarrollo</td><td class="num">3.900 – 5.200 €</td></tr>
+</table>
+
+<p>Los importes se presentan como horquilla porque hay tres cosas que aún dependen de
+vosotros; en cuanto estén decididas, la cifra se cierra en el contrato:</p>
+<ul>
+  <li>Si vuestra diseñadora aporta los diseños de pantalla, el bloque 5 va al mínimo.</li>
+  <li>La lista definitiva de campos de la ficha de vino (una lista cerrada va al mínimo).</li>
+  <li>Si la carga desde Excel/CSV se deja para más adelante, el bloque 3 baja unos 200&nbsp;€.</li>
+</ul>
+<div class="note">Precios sin IVA (21&nbsp;% aparte).</div>
+
+<h2>Dos modalidades</h2>
+
+<div class="option">
+  <h3>Opción A — Llave en mano · <span class="price">3.900 – 5.200 €</span></h3>
+  <p>Pagáis el desarrollo y recibís la aplicación funcionando. Cualquier cambio o
+  añadido posterior se presupuesta aparte en su momento.</p>
+</div>
+
+<div class="option">
+  <h3>Opción B — Llave en mano + 3 meses de cambios menores · <span class="price">4.350 – 5.650 €</span><span class="tag">RECOMENDADA</span></h3>
+  <p>Todo lo de la Opción A más <b>3 meses de cambios menores desde la entrega, hasta
+  4 horas al mes</b> (450&nbsp;€ en total, 150&nbsp;€/mes). Cubre los ajustes que
+  siempre aparecen cuando la aplicación empieza a usarse de verdad:</p>
+  <ul>
+    <li>Ajustes de contenido en fichas existentes y altas de algún vino nuevo</li>
+    <li>Cambios de textos, colores o estilos</li>
+    <li>Añadir o quitar campos simples de la ficha</li>
+    <li>Pequeños retoques de pantallas</li>
+  </ul>
+  <p>No entran como cambio menor (irían a presupuesto aparte): funciones nuevas,
+  cambios de arquitectura o base de datos, rediseños completos de pantalla.</p>
+</div>
+
+<div class="note"><b>Garantía (ambas opciones):</b> durante los 30 días siguientes a la
+entrega, cualquier error de funcionamiento se corrige sin coste. La garantía cubre
+errores (algo que debía funcionar y no funciona); los cambios menores de la Opción B
+cubren mejoras (algo que funciona pero se quiere distinto).</div>
+
+<h2>Qué no incluye</h2>
+<p>Queda fuera de esta versión y se presupuestaría aparte si algún día interesa:</p>
+<ul>
+  <li>Control de stock con cantidades (existencias reales por restaurante)</li>
+  <li>Precios en la aplicación (una carta comercial con los precios de venta de cada restaurante sería una ampliación futura)</li>
+  <li>Que los restaurantes editen su propia carta o añadan sus propios vinos (en esta versión solo consultan)</li>
+  <li>Recomendaciones de compra para cubrir huecos de la carta de un restaurante</li>
+  <li>Histórico o datos de colección por restaurante</li>
+  <li>Integraciones con TPV, ERP u otros sistemas</li>
+  <li>Diseños de pantalla de diseñadora (si los encargáis, van por vuestra cuenta)</li>
+  <li>Trabajo de identidad corporativa</li>
+</ul>
+
+<h2>Condiciones</h2>
+<ul>
+  <li><b>Forma de pago:</b> 30&nbsp;% a la aceptación del presupuesto, 70&nbsp;% a la entrega.</li>
+  <li><b>Plazo de entrega:</b> 4 a 6 semanas desde la aceptación y la entrega de
+  materiales (tarifas, fichas de vino y logo definitivo).</li>
+  <li><b>Propiedad:</b> el código y el alojamiento quedan a vuestro nombre desde el
+  primer día. El coste de alojamiento lo pagáis directamente al proveedor y es de
+  entre 0 y 10&nbsp;€/mes con el uso previsto. La aplicación es vuestra y no depende
+  de mí para seguir funcionando.</li>
+  <li><b>Cifra cerrada:</b> el contrato fijará el importe definitivo dentro de la
+  horquilla, una vez resueltos los tres puntos del apartado «Presupuesto».</li>
+</ul>
+
+<footer>
+  Cualquier duda sobre el desglose o las modalidades, me la comentáis y la vemos.
+</footer>
+
+</div>
+</body>
+</html>

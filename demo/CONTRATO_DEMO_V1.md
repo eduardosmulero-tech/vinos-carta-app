@@ -22,7 +22,7 @@ Si no se acepta el presupuesto, la demo queda como pieza de portfolio de Edu —
 |---|--------------|-------------|
 | 1 | **Listado de vinos** | Carta completa del restaurante con los 19 vinos reales (8 Andrade + 11 Sauci) |
 | 2 | **Búsqueda** | Buscador en la carta por nombre, tipo, bodega o uva |
-| 3 | **Ficha detallada** | Vista detalle de cada vino: nombre, bodega, tipo, variedad de uva, graduación, precio, notas de cata, D.O. |
+| 3 | **Ficha detallada** | Vista detalle de cada vino: nombre, bodega, tipo, variedad de uva, graduación, notas de cata, D.O. (sin precio — ver exclusiones) |
 | 4 | **Recomendaciones** | En ficha detallada: vinos de uva parecida (matching por atributo de variedad de uva + tipo) |
 
 ### Requisitos técnicos
@@ -42,6 +42,7 @@ Si no se acepta el presupuesto, la demo queda como pieza de portfolio de Edu —
 - ❌ Backend / API server
 - ❌ Carga de datos desde fuentes externas
 - ❌ Despliegue a producción
+- ❌ **Precios** (decisión Edu 16-jul: la app NO muestra precios en ninguna pantalla — el cliente es distribuidor, sus tarifas son precio de compra B2B confidencial y cada restaurante vende al precio que quiere; la app es herramienta de formación de camareros, no carta comercial. Carta con precios del restaurante = posible fase futura)
 
 ---
 
@@ -66,7 +67,7 @@ Si no se acepta el presupuesto, la demo queda como pieza de portfolio de Edu —
 
 1. **`docs/INFORMES/DISENO_REFERENCIAS.md`** — 19 vinos con marca, tipo, uva, graduación
 2. **`assets/`** — logo (`logo-bodegas-andrade.jpg`)
-3. **`demo-data/Tarifas_2026_Bodegas_Sauci.pdf`** — precios reales (extraer a JSON)
+3. **`demo-data/Tarifas_2026_Bodegas_Sauci.pdf`** — solo como referencia de nombres/formatos de los vinos. ⚠️ Los precios NO se extraen ni se usan: son tarifa B2B del distribuidor (confidencial) y la app no muestra precios
 
 ### Estructura de datos (vino)
 
@@ -79,7 +80,6 @@ interface Wine {
   grape: string;       // "Zalema", "Chardonnay", etc.
   region: string;      // D.O. o procedencia
   alcohol: number;     // graduación
-  price: number;       // euros
   volume: string;      // "75cl"
   description: string; // notas de cata / descripción
   image?: string;      // ruta a imagen (si existe)
