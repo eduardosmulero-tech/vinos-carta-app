@@ -129,30 +129,31 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (17-jul, actualizado tras Fase 2 · demo EN CONSTRUCCION en `app/`)
+### 🚦 EMPIEZA POR AQUI (17-jul, actualizado tras Fase 3 · demo EN CONSTRUCCION en `app/`)
 
 **Construir la demo. Directamente. Sin pipeline de Hermes.**
 
 - **La app vive en `app/`** (subcarpeta, NO en la raiz — decision 16-jul para no mezclar
   codigo con docs). Stack real instalado: Vite 8 (spec decia 6, sin impacto) + React 19 +
   TS + Tailwind v4 + vite-plugin-pwa + React Router 7.
-- **Fase 1 ✅ HECHA Y VERIFICADA (16-jul, Fable):** scaffolding completo, `npm run build`
-  verde, sw.js + manifest generados, preview servido OK. Hallazgos aplicados: la SPEC §6.1
-  olvidaba el plugin `@tailwindcss/vite` en vite.config.ts (añadido) y faltaba
-  `src/vite-env.d.ts` con tipos de `vite-plugin-pwa/client` (creado). Stubs de
-  WineList/WineDetail/Header en su sitio.
-- **Fase 2 ✅ HECHA Y VERIFICADA (17-jul, Fable):** `app/src/types/index.ts` (interface `Wine`
-  + `WineryName` + `WineGroup`, exacta a SPEC §2) y `app/src/data/wines.ts` (19 vinos: 8
-  Andrade + 11 Sauci, literales de SPEC §7). La escribio Fable directo — el comando delegado
-  a hyttp daba error y con 2 archivos ya especificados aplica la excepcion "<10 archivos
-  pequeños". **Doble verificacion:** (a) Fable: `npm run build` verde (incluye `tsc -b`) +
-  `npx tsc --noEmit` limpio + greps (19 ids, 0 `price`); (b) **revisor hy3 read-only**
-  (comparacion mecanica campo a campo vs SPEC §2/§7) → **VEREDICTO: OK, cero discrepancias**.
-  Criterio aplicado sobre la SPEC: tildes correctas en "Docenañero" (la SPEC las perdia) y
-  `grape: 'Múltiples variedades'` en el Vermut (lo indicaba la nota de §7.2).
-- **Fase 3 (SIGUIENTE):** layout y routing — logo real + fallback. Es criterio visual, mala
-  candidata para hy3 → la hace Fable. **Fase 4** (componentes) SI esta muy especificada en
-  SPEC §3 → ahi delegar el grueso a hy3.
+- **Fase 1 ✅ (16-jul, Fable):** scaffolding completo, build verde, sw.js + manifest OK.
+  Hallazgos aplicados a la SPEC: plugin `@tailwindcss/vite` y `src/vite-env.d.ts` faltaban.
+- **Fase 2 ✅ (17-jul, Fable + revisor hy3 OK):** tipos (SPEC §2) + 19 vinos (SPEC §7) en
+  `app/src/types/` y `app/src/data/`. Verificada: build + tsc + greps (19 ids, 0 `price`) +
+  revisor hy3 campo a campo → cero discrepancias. Criterio sobre la SPEC: tildes de
+  "Docenañero" y `grape: 'Múltiples variedades'` en el Vermut.
+- **Fase 3 ✅ HECHA Y VERIFICADA (17-jul, Fable):** layout y routing. Logo real copiado a
+  `app/public/logo-bodegas-andrade.jpg` y usado en `Header.tsx` con fallback SVG "BA" sobre
+  burgundy via `onError` (SPEC §3.3); `App.tsx` ya cumplia §3.2 de Fase 1 (sin cambios);
+  `WineDetail.tsx` ahora resuelve `:id` contra los datos y muestra "Vino no encontrado" +
+  boton volver si no existe (lo exigia la verificacion de Fase 3 del PLAN; la ficha completa
+  sigue siendo Fase 4). **Triple verificacion:** (a) `npm run build` verde; (b) revisor hy3
+  read-only vs SPEC §3.2/§3.3 + PLAN Fase 3 → **VEREDICTO OK, 6/6 PASS**; (c) preview smoke:
+  `/`, `/wine/test` y el logo responden 200 (logo `image/jpeg`).
+- **Fase 4 (SIGUIENTE):** componentes — SearchBar, WineCard, WineList, WineDetail completo,
+  SimilarWines. Esta muy especificada en SPEC §3 y PLAN 4.1-4.5 → candidata a delegar el
+  grueso a hy3 (escrituras: las lanza Edu con `!`, o Fable directo si aplica la excepcion
+  "<10 archivos pequeños ya especificados" — son 5 archivos, aplica).
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -176,8 +177,8 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   |---|---|
   | 1 · Scaffolding — Vite + React + TS + Tailwind v4 + PWA | ✅ **HECHA** (16-jul) |
   | 2 · Capa de datos — tipos + 19 vinos | ✅ **HECHA** (17-jul, Fable + revisor hy3 OK) |
-  | 3 · Layout y routing — Header + React Router | **`ready`** ← SIGUIENTE (Header/routing basicos ya en Fase 1; falta logo real + fallback) |
-  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | todo |
+  | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
+  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | **`ready`** ← SIGUIENTE (SPEC §3 / PLAN 4.1-4.5) |
   | 5 · Diseno visual y responsive — paleta, espaciado | todo |
   | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
 
@@ -209,8 +210,8 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 Claves aun operativas de sesiones pasadas:
 
 - **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo. La demo
-  esta en construccion (Fases 1-2 ✅; faltan 3-6: no hay UI usable todavia). Decidir si
-  acelerar fases 3-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
+  esta en construccion (Fases 1-3 ✅; faltan 4-6: la UI usable llega con la Fase 4). Decidir
+  si acelerar fases 4-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
 - Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
@@ -222,7 +223,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. Implementar demo fases 3-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
+1. Implementar demo fases 4-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
