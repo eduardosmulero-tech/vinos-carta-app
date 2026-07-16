@@ -150,10 +150,13 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   sigue siendo Fase 4). **Triple verificacion:** (a) `npm run build` verde; (b) revisor hy3
   read-only vs SPEC §3.2/§3.3 + PLAN Fase 3 → **VEREDICTO OK, 6/6 PASS**; (c) preview smoke:
   `/`, `/wine/test` y el logo responden 200 (logo `image/jpeg`).
-- **Fase 4 (SIGUIENTE):** componentes — SearchBar, WineCard, WineList, WineDetail completo,
-  SimilarWines. Esta muy especificada en SPEC §3 y PLAN 4.1-4.5 → candidata a delegar el
-  grueso a hy3 (escrituras: las lanza Edu con `!`, o Fable directo si aplica la excepcion
-  "<10 archivos pequeños ya especificados" — son 5 archivos, aplica).
+- **Fase 4 ✅ HECHA (16-jul, CommandCode + revisor code-action-reviewer):** 5 componentes
+  funcionales (SearchBar, WineCard, WineList, WineDetail, SimilarWines). Todos pasados por
+  code-action-reviewer con correcciones aplicadas en cada uno. Verificacion: `tsc --noEmit`
+  cero errores + `npm run build` verde + smoke test 200 en `/`, `/wine/niebla`, `/wine/test`.
+  Log detallado: `docs/LOG_FASE4_COMMANDCODE_2026-07-16.md`. **La Fase 4 la ejecuto
+  CommandCode (Claude Sonnet) sustituyendo a Sonnet directo mientras el limite de Pro de Edu
+  reseteaba** — el log diferencia quien hizo que.
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -178,7 +181,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   | 1 · Scaffolding — Vite + React + TS + Tailwind v4 + PWA | ✅ **HECHA** (16-jul) |
   | 2 · Capa de datos — tipos + 19 vinos | ✅ **HECHA** (17-jul, Fable + revisor hy3 OK) |
   | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
-  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | **`ready`** ← SIGUIENTE (SPEC §3 / PLAN 4.1-4.5) |
+  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA** (16-jul, CommandCode + code-action-reviewer) |
   | 5 · Diseno visual y responsive — paleta, espaciado | todo |
   | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
 
@@ -210,8 +213,8 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 Claves aun operativas de sesiones pasadas:
 
 - **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo. La demo
-  esta en construccion (Fases 1-3 ✅; faltan 4-6: la UI usable llega con la Fase 4). Decidir
-  si acelerar fases 4-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
+  esta en construccion (Fases 1-4 ✅; faltan 5-6: diseño visual y PWA/offline). Decidir
+  si acelerar fases 5-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
 - Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
@@ -223,7 +226,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. Implementar demo fases 4-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
+1. Implementar demo fases 5-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
@@ -245,6 +248,7 @@ Claves aun operativas de sesiones pasadas:
 | `docs/SPECS/CONSULTA_GESTORIA.md` | Notas limpias (voz de Edu, regla 4bis) para la consulta con la gestoria |
 | `docs/INFORME_DESCUBRIMIENTO_2026-07-12.md` | Analisis completo de la entrevista inicial |
 | `docs/DISENO_REFERENCIAS.md` | Paleta de colores (#f2ebe5, #73232d), 19 vinos para demo, assets |
+| `docs/LOG_FASE4_COMMANDCODE_2026-07-16.md` | ✅ Log de Fase 4: 5 componentes creados por CommandCode con revisiones y correcciones |
 | `demo/CONTRATO_DEMO_V1.md` | ✅ Contrato de la demo (alcance, stack, exclusiones) |
 | `demo/SPEC_DEMO_V1.md` | ✅ Revisada y corregida (4 hallazgos: logo real, image?, TS ratificado, tailwind.config nota) |
 | `demo/PLAN_DEMO_V1.md` | ✅ Revisado y corregido (3 hallazgos: tailwind init v3 eliminado, logo real, pwa.ts explicitado) |
