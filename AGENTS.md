@@ -129,98 +129,83 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-**Ultima sesion:** 16-jul noche (Fable + Edu, verificacion y ajuste del entregable).
-**4 resultados:**
-1. **Verificado el trabajo previo del worker (DeepSeek/Hermes):** limpieza del informe
-   cumple los 3 greps del contrato; entregable sin rastro IA; demo sin campo price;
-   git limpio. Sin desviaciones.
-2. **Contexto relacional registrado** (seccion nueva arriba): cunado = aliado/champion
-   interno, la socia decide y paga; guion §7 = municion PARA el cunado.
-3. **Decision de Edu: CIFRA CERRADA, no horquilla.** A = 4.600 e · B = 5.050 e, con 2
-   opciones que restan nombradas en el papel (−200 disenadora / −200 CSV aplazado;
-   minimo 4.200 > suelo 3.900). Campos de ficha cerrados por alcance. Aplicado en
-   PRESUPUESTO .md + .html (verificado: 0 rangos, suma = 4.600) y anotado como
-   actualizacion en DESGLOSE_PRECIOS_D1.md. Clausula "sin sorpresas" anadida a
-   Condiciones (coste extra se aprueba antes, no se factura nada fuera de lo aceptado).
-4. Pendiente [EDU] sin cambios: placeholders nombre/empresa/fecha + leer §6-§7 del
-   desglose (leyendolos ahora como argumentario para el cunado, no como defensa).
+### 🚦 EMPIEZA POR AQUI (16-jul, actualizado tras Fase 1 · demo EN CONSTRUCCION en `app/`)
 
-**Sesion anterior:** 16-jul (Fable, sesion de pricing con Edu). **3 resultados:**
-1. **D.1 CERRADA** — cifras ratificadas por Edu: A 3.900-5.200 · B 4.350-5.650
-   (soporte 450e = 4h/mes × 3 meses). Desglose por partidas, modelo interno de horas,
-   suelos (A 3.900 / B 4.350), palancas de recorte, drivers min/max por partida y
-   guion de defensa (FAQ + respuesta a "¿usas IA?" + regla anti-quedarse-en-blanco):
-   `docs/SPECS/DESGLOSE_PRECIOS_D1.md`. Edu debe leerse el §6-§7 antes de presentar.
-2. **Presupuesto entregable GENERADO** (#8 cerrado): `docs/ENTREGABLES/
-   PRESUPUESTO_APP_CARTA_VINOS.md` + `.html` imprimible a PDF. Falta [EDU]: rellenar
-   nombre/empresa/fecha.
-3. **Decision nueva: SIN PRECIOS en la app** (ver tabla Cerrado) — aplicada en
-   entregable, desglose y demo (contrato/spec/plan: campo `price` eliminado, la UVA
-   pasa a ser el dato destacado). Evitado: la demo iba a mostrar tarifas B2B
-   confidenciales del distribuidor. Reencuadre de venta: "formacion de sumiller en el
-   bolsillo del camarero", no "carta digital".
+**Construir la demo. Directamente. Sin pipeline de Hermes.**
 
-**Sesion anterior:** 16-jul noche (Sonnet, sesion interactiva con Edu). **Cola D.1-D.6
-respondida 1 a 1 con Edu:**
+- **La app vive en `app/`** (subcarpeta, NO en la raiz — decision 16-jul para no mezclar
+  codigo con docs). Stack real instalado: Vite 8 (spec decia 6, sin impacto) + React 19 +
+  TS + Tailwind v4 + vite-plugin-pwa + React Router 7.
+- **Fase 1 ✅ HECHA Y VERIFICADA (16-jul, Fable):** scaffolding completo, `npm run build`
+  verde, sw.js + manifest generados, preview servido OK. Hallazgos aplicados: la SPEC §6.1
+  olvidaba el plugin `@tailwindcss/vite` en vite.config.ts (añadido) y faltaba
+  `src/vite-env.d.ts` con tipos de `vite-plugin-pwa/client` (creado). Stubs de
+  WineList/WineDetail/Header en su sitio.
+- **Fase 2 (SIGUIENTE): tipos + 19 vinos.** Delegacion a hy3 preparada: **Edu la lanza
+  con prefijo `!`** (el clasificador de permisos bloquea `--yolo` lanzado por Fable; via
+  `!` la corre Edu y R9 queda perfecto). El comando exacto quedo en la conversacion del
+  16-jul; si se perdio, reconstruirlo: copiar SPEC §2+§7 y DISENO_REFERENCIAS a `app/`,
+  contrato = types/index.ts + data/wines.ts, 19 vinos exactos, SIN price, borrar copias al
+  acabar. Tras hy3: Fable verifica (compila, 19 vinos, 0 price) y sigue Fase 3.
+- **Leccion delegacion (16-jul):** command-code sin `--yolo` NO escribe archivos; con
+  `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 = lanzarlas Edu con
+  `!`, o Fable escribe directo si son <10 archivos pequeños ya especificados.
 
-| # | Resultado |
-|---|-----------|
-| D.1 (cifras horquilla + precio soporte B) | **CERRADA (16-jul, ratificada por Edu).** Cifras finales: A 3.900-5.200 · B 4.350-5.650 (soporte 450e = hasta 4h/mes × 3 meses, 37,5e/h). Suelos de negociacion: A 3.900 / B 4.350 — por debajo se quita alcance, no precio (palancas en §6 del desglose). Desglose + guion de defensa: `docs/SPECS/DESGLOSE_PRECIOS_D1.md`. Antecedente: Sonnet a esfuerzo medio fallo la aritmetica precio+horas; no reabrir cifras con Sonnet sin verificacion explicita. |
-| D.2 | CERRADA: Opcion B confirmada como recomendada, Opcion C retirada de la propuesta (sustituible por bolsa de horas puntual futura) |
-| D.3 | CERRADA: garantia de 30 dias de correccion de errores sin coste anadida a la Opcion A |
-| D.4 | HECHO: `git init` local ejecutado, commit inicial `1db306d` (docs/, demo/, assets/, AGENTS.md, CLAUDE.md, .hermes/desktop-attachments/) |
-| D.5 | CERRADA: la ratificacion de la Pregunta D del 15-jul fue conversacion real con el cunado (no cierre interno) — confirma que restaurantes solo consultan y ademas aclara que el inventariado queda "a medio plazo" (coherente con MVP sin stock ya cerrado). La pregunta 1 de B.3 NO hace falta repreguntarla. |
-| D.6 | En marcha: cita con gestoria programada para la semana del 20-jul (no bloquea nada ahora) |
+  | Fase | Estado |
+  |---|---|
+  | 1 · Scaffolding — Vite + React + TS + Tailwind v4 + PWA | ✅ **HECHA** (16-jul) |
+  | 2 · Capa de datos — tipos + 19 vinos | **`ready`** ← Edu lanza hy3 con `!` |
+  | 3 · Layout y routing — Header + React Router | todo (Header/routing basicos ya en Fase 1; falta logo real + fallback) |
+  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | todo |
+  | 5 · Diseno visual y responsive — paleta, espaciado | todo |
+  | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
 
-**Nota de contexto:** Edu ve a su cunado en persona el sabado 18-jul (reunion familiar) y
-queria aprovechar para ensenar la demo, pero la demo AUN NO esta implementada (solo
-contrato/spec/plan aprobados — ver pendientes #4 y #5 abajo). Edu decidio no resolver
-este cruce de tiempos en la sesion del 16-jul; sigue abierto para la proxima sesion si
-quiere acelerar antes del sabado o dejarlo para mas adelante.
+  ```bash
+  wsl -d Ubuntu -- bash -lc 'hermes kanban --board vinos-carta-app list'
+  ```
+  Reasignar a `fable` la fase que se trabaje (`hermes kanban assign <id> fable`) — ver skill
+  `second-brain` en `promethe-os/.claude/skills/`.
 
-**Sesion anterior:** 16-jul (Fable). **Auditoría completa del encargo de Sonnet ENTREGADA:**
-`docs/REVIEWS/AUDITORIA_FABLE_RESPUESTA_2026-07-16.md` (veredictos idea/planes/legal +
-**cola de decisiones D.1–D.6 para Edu** — leer eso primero) y
-`docs/SPECS/CONSULTA_GESTORIA.md` (notas limpias para la gestoría, regla 4bis, listas
-para llevar). Claves: la contradicción 036-vs-RETA queda diagnosticada (MARCO_LEGAL §4
-aplicaba una regla de negocio de Pepito, no una norma; recomendación = Opción B + 036 +
-hosting a nombre del cliente, **CONDICIONADA a gestoría antes de la primera factura**);
-retirar Opción C de la propuesta; horquilla MANTENER; hallazgo nuevo: cita STS 29-10-2019
-de v4 sin verificar. Correcciones mecánicas delegables listadas al final de la auditoría.
+- **Paleta y datos de vinos:** `docs/DISENO_REFERENCIAS.md`. **Spec:** `demo/SPEC_DEMO_V1.md` (24 KB,
+  seria). **Sin campo `price` en la app** (decision cerrada: son tarifas B2B confidenciales).
 
-Antecedente: 15-jul 23:14 (Principal) corrección de AGENTS.md y verificación de la demo;
-15-jul 22:41 revisión externa de SPEC + PLAN via Documentador (hy3).
-Session `20260715_224924_7e1ab3` sobre pipeline Kanban + subagentes sigue abierta (sin cerrar).
+> ### ⛔ NO uses la pipeline de Hermes. El `[SIGUIENTE]` de mas abajo esta OBSOLETO.
+> El punto 4 de "Proximos pasos" dice *"migrar PLAN_DEMO_V1 a pipeline Kanban con 7 campos +
+> `advance_workflow_phase` → `confirm_advance` → reviewer"*. **Eso esta roto y congelado**
+> (16-jul): el plugin `dev-workflow` espera 7 columnas custom que la DB real no tiene, y el plan que
+> lo guiaba es inejecutable (4 defectos, 3 silenciosos). Detalle:
+> `promethe-os/docs/06_loop/contratos/AUDITORIA_FABLE_PLAN_PIPELINE_2026-07-16.md`.
+> **Usa el Kanban nativo y punto.** La demo no depende de nada de Hermes.
 
-### Sobre la demo — estado real tras verificar sesiones anteriores
+- **Delegar trabajo mecanico:** skill `command-code` (hy3 gratis, verificada 16-jul). **El tool
+  `Agent` esta PROHIBIDO** — consume el limite de Pro de Edu.
+- **[EDU] pendiente:** rellenar placeholders nombre/empresa/fecha del presupuesto + leer §6-§7 de
+  `DESGLOSE_PRECIOS_D1.md` antes de la reunion con el cunado.
 
-| Documento | Estado real |
-|-----------|-------------|
-| `demo/CONTRATO_DEMO_V1.md` | ✅ Aprobado por Edu |
-| `demo/SPEC_DEMO_V1.md` | ✅ Revisado por hy3 (VEREDICTO: RETURN → 4 hallazgos corregidos) |
-| `demo/PLAN_DEMO_V1.md` | ✅ Revisado por hy3 (VEREDICTO: RETURN → 3 hallazgos corregidos) |
-| | ⚠️ El PLAN NO usa la pipeline Kanban — escrito con delegate_task directo, sin state machine, sin tarjetas Kanban. **Pendiente de migrar** |
+---
 
-La review externa se hizo en sesion `20260715_224156_f96415` el 15-jul 22:41. SPEC y PLAN corregidos y listos para implementacion, pero el PLAN actual no contempla el flujo Kanban con `create_dev_kanban_task`, `advance_workflow_phase` ni `confirm_advance` (el pipeline Kanban de Promethe-os se diseno el 14-jul, un dia antes del PLAN).
+**Historial de sesiones: vive en `git log` y en los docs de referencia, no aqui.**
+Claves aun operativas de sesiones pasadas:
 
-### Informe profesional y presupuesto
-
-Documento INFORME_TECNICO_PROFESIONAL.md: 950 lineas, 0 refs Claude, tono profesional.
-Decisiones cerradas anteriores: E.3 (B), D.2 (codigo), P6 (espanol), B.2 (PDF admin-side), anticipo 30/70, hosting Opcion C.
-Horquilla RATIFICADA 16-jul (D.1 cerrada): A 3.900-5.200€ · B 4.350-5.650€ (C retirada por D.2). **Superseder posterior (16-jul noche): Edu decide CIFRA CERRADA A 4.600 / B 5.050 con opciones −200/−200 — ver nota de actualizacion en DESGLOSE_PRECIOS_D1.md.** HORQUILLA.md queda como historico supersedido; vigente: docs/SPECS/DESGLOSE_PRECIOS_D1.md. **Presupuesto entregable GENERADO:** docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md + .html imprimible (faltan por rellenar: nombre, empresa, fecha).
+- **Sabado 18-jul:** Edu ve al cunado en persona y queria ensenar la demo. La demo esta
+  en construccion (Fase 1 ✅). Decidir si acelerar fases 2-6 antes del sabado → **[EDU]**.
+- **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
+  `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
+- Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
+  en papel). HORQUILLA.md = historico supersedido.
+- Antecedente: Sonnet a esfuerzo medio fallo aritmetica precio+horas — no reabrir cifras
+  con Sonnet sin verificacion explicita.
+- Demo: CONTRATO/SPEC/PLAN aprobados y revisados (hy3, 15-jul). La maquinaria
+  worker↔reviewer del PLAN quedo sustituida por el flujo del 🚦 de arriba.
 
 ### Pendientes
 
-1. ~~**Ejecutar limpieza del INFORME_TECNICO_PROFESIONAL.md**~~ ✅ Completado
-2. ~~**REVISAR demo SPEC + PLAN con reviewer externo**~~ ✅ Completado (sesion 22:41, hy3)
-3. ~~**Responder cola de decisiones D.1–D.6**~~ ✅ D.2-D.6 cerradas/en marcha 16-jul noche. D.1 (cifras) queda **[PENDIENTE — EDU + FABLE, con datos reales]**
-4. Migrar PLAN_DEMO_V1.md a pipeline Kanban (crear tarjetas Kanban con 7 campos, ciclo `advance_workflow_phase` → `confirm_advance` → worker → reviewer con `estado_reviewer`) → **[SIGUIENTE]**
-5. Ejecutar implementacion de la demo (6 fases via Kanban, worker + reviewer) → **[TRAS #4]**
-6. Consulta con gestor llevando `docs/SPECS/CONSULTA_GESTORIA.md` (D.6 — programada semana del 20-jul, antes de la propuesta y de la 1ª factura) → **[EDU, en marcha]**
-7. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[SONNET/HERMES, tras D.2-D.3 — ya cerradas, desbloqueado]**
-8. ~~Generar presupuesto final con cifras cerradas~~ ✅ HECHO (16-jul, Fable): `docs/ENTREGABLES/PRESUPUESTO_APP_CARTA_VINOS.md` + `.html` imprimible. **Solo falta [EDU]: rellenar nombre/empresa/fecha e imprimir a PDF, y leer el guion de defensa (§7 de DESGLOSE_PRECIOS_D1.md) antes de presentar**
-9. Presentar al cunado: presupuesto (entregable de #8) + demo + Opcion B (+ preguntas B.3 de la auditoria, salvo la pregunta 1 que ya no hace falta por D.5; la pregunta sobre precios quedo resuelta el 16-jul: SIN precios, ver tabla Cerrado)
-10. Decidir que hacer con la visita del sabado 18-jul (demo aun no lista) → **[EDU, abierto]**
+1. Implementar demo fases 2-6 (flujo del 🚦: hy3 via `!` de Edu o Fable directo + verificacion Fable)
+2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
+3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
+4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
+5. Presentar al cunado: presupuesto + demo + Opcion B (+ preguntas B.3 de la auditoria; la 1 ya no hace falta por D.5; precios resuelto: SIN precios)
+6. Decidir que hacer con la visita del sabado 18-jul → **[EDU, abierto]**
 
 ### Documentos de referencia
 
@@ -273,16 +258,15 @@ al final del mensaje.
 ### Restricciones vigentes
 
 - Alta censal 036 (sin autonomo) para Opciones A y B. Opcion C exige RETA.
-- Cifra final la decide Edu. Los rangos en HORQUILLA.md son sugerencias.
-- Sin repo git hasta implementacion.
+- Cifra final la decide Edu (vigente: cifra cerrada A 4.600 / B 5.050).
 - Sin features por iniciativa propia (regla a-13-1).
 
 ---
 
 ## RESTRICCIONES DEL PROYECTO
 
-- **No hay repo git — no versionado.** Inicializar repo cuando se llegue a implementacion.
-- **No hay codigo escrito — fase pre-code pura.** Todo es documentacion y analisis.
+- **Repo git local activo** (commit inicial `1db306d`; historial en `git log`). Sin remote. **Commits: siempre SIN coautoria (sin Co-Authored-By ni trailer de sesion) y con OK de Edu salvo el commit de cierre de sesion (protocolo 17-jul).**
+- **Codigo en `app/`** — demo en construccion (Fase 1 ✅). Docs y analisis en `docs/` y `demo/`.
 - **No anadir features por iniciativa propia** sin confirmacion del cliente (regla `a-13-1`).
 - **Toda decision de dinero = Edu.** La cifra final la pone el.
 - **No escribir propuesta con precio hasta tener A y D respondidas.**
