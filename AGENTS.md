@@ -157,6 +157,13 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   Log detallado: `docs/LOG_FASE4_COMMANDCODE_2026-07-16.md`. **La Fase 4 la ejecuto
   CommandCode (Claude Sonnet) sustituyendo a Sonnet directo mientras el limite de Pro de Edu
   reseteaba** — el log diferencia quien hizo que.
+- **Revision Fable de Fase 4 ✅ (17-jul):** codigo contrastado contra SPEC §3.4-§3.8 componente
+  a componente. Veredicto: correcto salvo **1 defecto corregido — doble debounce** (SearchBar
+  ya debouncea 300ms segun SPEC §3.4; el reviewer de CommandCode añadio OTRO `useDebounce` en
+  `WineList` malinterpretando §3.6 → busqueda y boton limpiar tardaban ~600ms). Fix: eliminado
+  el hook de WineList, `searchQuery` se usa directo. Re-verificado: tsc 0 errores + build verde
+  + preview 200 en `/` y `/wine/niebla`. Ademas: `.commandcode/` (estado interno de la
+  herramienta, `taste/taste.md`) añadido a un `.gitignore` nuevo en la raiz.
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -181,7 +188,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   | 1 · Scaffolding — Vite + React + TS + Tailwind v4 + PWA | ✅ **HECHA** (16-jul) |
   | 2 · Capa de datos — tipos + 19 vinos | ✅ **HECHA** (17-jul, Fable + revisor hy3 OK) |
   | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
-  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA** (16-jul, CommandCode + code-action-reviewer) |
+  | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA Y REVISADA** (16-jul CommandCode · 17-jul revision Fable: 1 fix doble-debounce) |
   | 5 · Diseno visual y responsive — paleta, espaciado | todo |
   | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
 

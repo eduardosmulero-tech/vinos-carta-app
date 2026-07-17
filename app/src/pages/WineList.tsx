@@ -1,24 +1,15 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import wines from '../data/wines';
 import type { Wine } from '../types';
 import SearchBar from '../components/SearchBar';
 import WineCard from '../components/WineCard';
 
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-  return debounced;
-}
-
 function WineList() {
+  // searchQuery llega ya debounced (300ms): el debounce vive en SearchBar (SPEC §3.4)
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedQuery = useDebounce(searchQuery, 300);
 
   const filteredWines = useMemo(() => {
-    const query = debouncedQuery.toLowerCase().trim();
+    const query = searchQuery.toLowerCase().trim();
     if (!query) return wines;
     return wines.filter(
       (w) =>
@@ -27,9 +18,9 @@ function WineList() {
         w.type.toLowerCase().includes(query) ||
         w.grape.toLowerCase().includes(query)
     );
-  }, [debouncedQuery]);
+  }, [searchQuery]);
 
-  const isSearching = debouncedQuery.trim().length > 0;
+  const isSearching = searchQuery.trim().length > 0;
 
   const groupedWines = useMemo(() => {
     const groups = new Map<string, Wine[]>();
