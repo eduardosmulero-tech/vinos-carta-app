@@ -129,7 +129,23 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (17-jul, actualizado tras Fase 3 · demo EN CONSTRUCCION en `app/`)
+### 🚦 EMPIEZA POR AQUI (17-jul noche · demo ONLINE, lista para enseñar)
+
+**La demo esta desplegada y online.** Repo publico en GitHub
+(`https://github.com/eduardosmulero-tech/vinos-carta-app`, root `app/`) importado en Vercel
+y desplegado por Edu — build Vite detectado automaticamente. Para el sabado 18-jul: Edu
+abre el link en su movil, se lo pasa al cunado, y este puede "Añadir a pantalla de inicio"
+(PWA instalable) igual que Edu. Sin friccion tecnica pendiente para esa demo.
+
+**Nota de exposicion:** la app muestra el logo/nombre real de Bodegas Andrade y datos de
+vino derivados de tarifas reales de Bodegas Sauci (`demo-data/`). La URL de Vercel es
+publica (no indexada, pero accesible por cualquiera con el link) — aceptable para un demo
+de estudiante mostrado en privado; si se quisiera cerrar del todo habria que meter password
+(plan Vercel Pro) o `noindex`, no hecho por no ser necesario ahora mismo.
+
+---
+
+### 🚦 Historial de construccion (17-jul, Fases 1-6)
 
 **Construir la demo. Directamente. Sin pipeline de Hermes.**
 
@@ -175,7 +191,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   custom + preview 200 en `/`, `/wine/niebla`, `/wine/test` + revisor hy3 read-only contra
   SPEC §5 y PLAN Fase 5 → VEREDICTO OK. Los checks visuales de viewport (375/768/1024) van
   por auditoría de clases, no render real — si algo se ve raro en la demo, mirar ahí primero.
-- **Fase 6 ✅ IMPLEMENTADA Y VERIFICADA (17-jul, Fable · revisor hy3 PENDIENTE por rate limit):**
+- **Fase 6 ✅ IMPLEMENTADA, VERIFICADA Y REVISADA (17-jul, Fable · revisor hy3 8/8 PASS):**
   PWA y offline. La config `VitePWA` completa ya estaba desde Fase 1; lo hecho ahora:
   (1) `public/logo-192x192.png` y `logo-512x512.png` generados desde el logo real (1254×1254
   cuadrado, System.Drawing bicúbico HQ; el 192 comprobado visualmente); (2) `favicon.svg`
@@ -190,10 +206,12 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   `manifest.webmanifest`, no `manifest.json` como dice SPEC §1 — comportamiento estándar de
   vite-plugin-pwa, no es defecto. Los checks de navegador del PLAN (installable en DevTools,
   recarga offline real, Lighthouse) van por auditoría de artefactos, no browser real — si Edu
-  quiere el check visual, abrir preview y DevTools > Application. **Revisor hy3: NO corrido**
-  — Novita devolvió token rate limit 3 veces (17-jul); relanzarlo cuando el limite afloje
-  (prompt-contrato C1-C8 en el historial de sesión) o darlo por cubierto con la verificación
-  mecánica de arriba.
+  quiere el check visual, abrir preview y DevTools > Application. **Revisor hy3: OK (17-jul,
+  tras reintento por rate limit de Novita)** — C1-C8 los 8 PASS y las 3 desviaciones sobre
+  la SPEC ratificadas (`jpg,jpeg` en globPatterns, `lang: 'es'` en manifest,
+  `manifest.webmanifest` en vez de `manifest.json`). Salvedad del revisor: no pudo leer
+  `demo/SPEC_DEMO_V1.md`/`PLAN_DEMO_V1.md` (fuera de su workspace) — verificó contra los
+  requisitos citados en el prompt-contrato.
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -220,7 +238,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
   | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA Y REVISADA** (16-jul CommandCode · 17-jul revision Fable: 1 fix doble-debounce) |
   | 5 · Diseno visual y responsive — paleta, espaciado | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
-  | 6 · PWA y offline — service worker, manifest, iconos | ✅ **HECHA** (17-jul, Fable; revisor hy3 pendiente por rate limit) |
+  | 6 · PWA y offline — service worker, manifest, iconos | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
 
   ```bash
   wsl -d Ubuntu -- bash -lc 'hermes kanban --board vinos-carta-app list'
@@ -249,9 +267,9 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 **Historial de sesiones: vive en `git log` y en los docs de referencia, no aqui.**
 Claves aun operativas de sesiones pasadas:
 
-- **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo.
-  **La demo esta COMPLETA (Fases 1-6 ✅, 17-jul).** Para ensenarla: `cd app && npm run preview`
-  (o `npm run dev`). Queda a Edu decidir si la ensena ya o solo el presupuesto.
+- **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona. **RESUELTO (17-jul noche):** demo
+  desplegada online en Vercel (ver 🚦 arriba) — Edu la enseña por link/movil, no hace falta
+  `npm run preview` local. Queda a Edu decidir si ademas enseña el presupuesto en esa visita.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
 - Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
@@ -263,7 +281,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. ~~Implementar demo fase 6~~ ✅ HECHA (17-jul). **La demo está COMPLETA (Fases 1-6).** Queda opcional: revisor hy3 de Fase 6 (bloqueado por rate limit de Novita) y check visual en navegador (installable + offline real)
+1. ~~Implementar demo fase 6~~ ✅ HECHA (17-jul). ~~Desplegar online~~ ✅ HECHA (17-jul noche, GitHub + Vercel). **La demo está COMPLETA y ONLINE.** Queda opcional: check visual en navegador (installable + offline real)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
@@ -329,7 +347,10 @@ al final del mensaje.
 
 ## RESTRICCIONES DEL PROYECTO
 
-- **Repo git local activo** (commit inicial `1db306d`; historial en `git log`). Sin remote. **Commits: siempre SIN coautoria (sin Co-Authored-By ni trailer de sesion) y con OK de Edu salvo el commit de cierre de sesion (protocolo 17-jul).**
+- **Repo git activo con remote en GitHub** (17-jul): `https://github.com/eduardosmulero-tech/vinos-carta-app`
+  (publico). `gh` CLI instalado via winget y logueado como `eduardosmulero-tech`. **Commits:
+  siempre SIN coautoria (sin Co-Authored-By ni trailer de sesion) y con OK de Edu salvo el
+  commit de cierre de sesion (protocolo 17-jul).**
 - **Codigo en `app/`** — demo en construccion (Fase 1 ✅). Docs y analisis en `docs/` y `demo/`.
 - **No anadir features por iniciativa propia** sin confirmacion del cliente (regla `a-13-1`).
 - **Toda decision de dinero = Edu.** La cifra final la pone el.
