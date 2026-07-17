@@ -47,12 +47,12 @@ function SearchBar({ value, onChange }: SearchBarProps) {
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         placeholder="Buscar por nombre, bodega, tipo o uva…"
-        className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-10 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-12 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
       {localValue && (
         <button
           onClick={handleClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-gray-400 transition-colors hover:text-gray-600"
           aria-label="Limpiar búsqueda"
         >
           ✕

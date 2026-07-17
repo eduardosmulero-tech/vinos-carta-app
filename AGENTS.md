@@ -164,6 +164,17 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   el hook de WineList, `searchQuery` se usa directo. Re-verificado: tsc 0 errores + build verde
   + preview 200 en `/` y `/wine/niebla`. Ademas: `.commandcode/` (estado interno de la
   herramienta, `taste/taste.md`) añadido a un `.gitignore` nuevo en la raiz.
+- **Fase 5 ✅ HECHA Y REVISADA (17-jul, Fable + revisor hy3 8/8 PASS):** diseño visual y
+  responsive. La Fase 4 ya cumplía casi toda la SPEC §5; gaps corregidos por Fable (edits
+  pequeños, <10 archivos): (1) `--font-family-sans` → `--font-sans` en `index.css` — la SPEC
+  usa el namespace de Tailwind v3, en v4 el correcto es `--font-sans` (criterio sobre la SPEC,
+  ratificado por el revisor); (2) `lg:px-16` añadido al Header; (3) botón "Ver más" de
+  WineCard a `min-h-11` (44px táctil, antes ~36px); (4) botón limpiar de SearchBar a
+  `h-11 w-11`; (5) padding responsive en "Vino no encontrado" + `transition-colors` en
+  botones. Verificación: tsc 0 errores + build verde + CSS generado contiene `--font-sans`
+  custom + preview 200 en `/`, `/wine/niebla`, `/wine/test` + revisor hy3 read-only contra
+  SPEC §5 y PLAN Fase 5 → VEREDICTO OK. Los checks visuales de viewport (375/768/1024) van
+  por auditoría de clases, no render real — si algo se ve raro en la demo, mirar ahí primero.
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -189,7 +200,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   | 2 · Capa de datos — tipos + 19 vinos | ✅ **HECHA** (17-jul, Fable + revisor hy3 OK) |
   | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
   | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA Y REVISADA** (16-jul CommandCode · 17-jul revision Fable: 1 fix doble-debounce) |
-  | 5 · Diseno visual y responsive — paleta, espaciado | todo |
+  | 5 · Diseno visual y responsive — paleta, espaciado | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
   | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
 
   ```bash
@@ -220,7 +231,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 Claves aun operativas de sesiones pasadas:
 
 - **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo. La demo
-  esta en construccion (Fases 1-4 ✅; faltan 5-6: diseño visual y PWA/offline). Decidir
+  esta en construccion (Fases 1-5 ✅; falta 6: PWA/offline e iconos). Decidir
   si acelerar fases 5-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
@@ -233,7 +244,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. Implementar demo fases 5-6 (flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
+1. Implementar demo fase 6 — PWA/offline, iconos 192/512 + favicon (la 5 ✅ 17-jul; flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar

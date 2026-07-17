@@ -21,7 +21,7 @@ function WineCard({ wine }: WineCardProps) {
       </div>
       <p className="mt-3 text-lg font-semibold text-primary">{wine.grape}</p>
       <div className="mt-4">
-        <span className="inline-block rounded bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dk">
+        <span className="inline-flex min-h-11 items-center rounded bg-primary px-4 text-sm font-semibold text-white transition-colors hover:bg-primary-dk">
           Ver más
         </span>
       </div>

@@ -8,11 +8,11 @@ function WineDetail() {
 
   if (!wine) {
     return (
-      <div className="px-4 py-16 text-center">
+      <div className="px-4 py-16 text-center md:px-8 lg:px-16">
         <p className="mb-6 text-lg">Vino no encontrado</p>
         <Link
           to="/"
-          className="inline-block rounded bg-primary px-5 py-3 font-semibold text-white hover:bg-primary-dk"
+          className="inline-block rounded bg-primary px-5 py-3 font-semibold text-white transition-colors hover:bg-primary-dk"
         >
           ← Volver a la carta
         </Link>

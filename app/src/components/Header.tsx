@@ -6,7 +6,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-10 bg-primary text-white">
-      <div className="flex h-14 items-center px-4 md:h-18 md:px-8">
+      <div className="flex h-14 items-center px-4 md:h-18 md:px-8 lg:px-16">
         <Link to="/" className="flex items-center gap-3">
           {logoFailed ? (
             <svg
