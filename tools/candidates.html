@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Candidatos de botellas — Bodegas Andrade</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f2ebe5; color: #232421; padding: 2rem; }
+    .page { margin-bottom: 3rem; border-top: 2px solid #73232d; padding-top: 1rem; }
+    h2 { color: #73232d; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .card { background: #fff; border: 1px solid #e7dcd2; border-radius: 8px; padding: 0.75rem; text-align: center; }
+    .card img { max-height: 260px; width: auto; object-fit: contain; }
+    .name { font-size: 0.85rem; color: #6f675f; word-break: break-all; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Candidatos de imágenes por página</h1>
+  <p>Revisa cada grupo y elige la foto de botella correcta.</p>
+  <div id="gallery"></div>
+  <script>
+    const pages = [12, 14, 16, 18, 20, 22, 24, 26];
+    const gallery = document.getElementById('gallery');
+    pages.forEach(page => {
+      const section = document.createElement('section');
+      section.className = 'page';
+      section.innerHTML = `<h2>Página ${page}</h2><div class="grid" id="page-${page}"></div>`;
+      gallery.appendChild(section);
+      const grid = section.querySelector('.grid');
+      for (let img = 1; img <= 20; img++) {
+        const file = `page${page.toString().padStart(2, '0')}_img${img.toString().padStart(2, '0')}.webp`;
+        const path = `../app/public/bottles/${file}`;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<img src="${path}" alt="${file}" onerror="this.parentElement.style.display='none'"/><div class="name">${file}</div>`;
+        grid.appendChild(card);
+      }
+    });
+  </script>
+</body>
+</html>

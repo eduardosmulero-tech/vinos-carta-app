@@ -6,12 +6,16 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-10 bg-primary text-white">
-      <div className="flex h-14 items-center px-4 md:h-18 md:px-8 lg:px-16">
-        <Link to="/" className="flex items-center gap-3">
+      <div className="grid h-14 grid-cols-[1fr_auto_1fr] items-center px-4 md:h-18 md:px-8 lg:px-16">
+        {/* Hueco reservado al futuro menú por tipos */}
+        <div className="md:block" aria-hidden="true" />
+
+        {/* Logo centrado */}
+        <Link to="/" className="flex justify-center">
           {logoFailed ? (
             <svg
               viewBox="0 0 40 40"
-              className="h-9 w-9 rounded-full ring-2 ring-white/60 md:h-10 md:w-10"
+              className="h-12 w-12 rounded-full ring-2 ring-white/60 md:h-13 md:w-13"
               role="img"
               aria-label="Bodegas Andrade"
             >
@@ -32,12 +36,18 @@ function Header() {
             <img
               src="/logo-bodegas-andrade.jpg"
               alt="Bodegas Andrade"
-              className="h-9 w-9 rounded-full object-cover ring-2 ring-white/60 md:h-10 md:w-10"
+              className="h-12 w-12 rounded-full object-cover ring-2 ring-white/60 md:h-13 md:w-13"
               onError={() => setLogoFailed(true)}
             />
           )}
-          <span className="text-lg font-bold">Vinos — Carta Digital</span>
         </Link>
+
+        {/* Subtítulo derecha */}
+        <div className="flex justify-end">
+          <span className="text-xs font-semibold uppercase tracking-widest text-white/90">
+            Carta Digital
+          </span>
+        </div>
       </div>
     </header>
   );

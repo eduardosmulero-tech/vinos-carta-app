@@ -2,10 +2,60 @@
 
 @theme {
   --color-bg: #f2ebe5;
+  --color-surface: #fdfaf6;
   --color-primary: #73232d;
   --color-primary-dk: #6e1428;
-  --color-text: #232421;
+  --color-ink: #232421;
+  --color-muted: #6f675f;
+  --color-line: #e7dcd2;
+  --color-gold: #b08d57;
   --color-white: #ffffff;
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-bg);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .stagger-card {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: stagger-in 0.4s ease-out forwards;
+  }
+
+  @keyframes stagger-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

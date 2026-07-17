@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { Wine } from '../types';
 import wines from '../data/wines';
+import { getFamilyStyle } from '../lib/families';
+import BottleSilhouette from './BottleSilhouette';
 
 interface SimilarWinesProps {
   currentWine: Wine;
@@ -28,20 +30,53 @@ function SimilarWines({ currentWine }: SimilarWinesProps) {
   }
 
   return (
-    <section className="mt-8 border-t border-gray-200 pt-8">
-      <h2 className="mb-4 text-xl font-bold text-text">Vinos similares</h2>
+    <section className="mt-10 border-t border-line pt-8">
+      <h2 className="mb-4 font-display text-2xl font-semibold text-ink">Vinos similares</h2>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {displayed.map((wine) => (
-          <Link
-            key={wine.id}
-            to={`/wine/${wine.id}`}
-            className="rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
-          >
-            <p className="font-bold text-text">{wine.name}</p>
-            <p className="mt-1 text-sm text-gray-500">{wine.winery}</p>
-            <p className="mt-1 text-sm font-semibold text-primary">{wine.grape}</p>
-          </Link>
-        ))}
+        {displayed.map((wine) => {
+          const familyStyle = getFamilyStyle(wine.type);
+          const reason =
+            wine.grape === currentWine.grape ? 'misma uva' : 'mismo tipo';
+          const initial = wine.name.charAt(0).toUpperCase();
+
+          return (
+            <Link
+              key={wine.id}
+              to={`/wine/${wine.id}`}
+              viewTransition
+              className="group flex items-center gap-3 overflow-hidden rounded-lg border border-line bg-surface p-3 transition-shadow hover:shadow-md active:scale-[0.99]"
+            >
+              <div
+                className="h-24 w-16 flex-shrink-0 rounded bg-bg p-1"
+                style={{ borderTop: `2px solid ${familyStyle.tint}` }}
+              >
+                {wine.image ? (
+                  <img
+                    src={wine.image}
+                    alt={`Botella de ${wine.name}`}
+                    loading="lazy"
+                    className="h-full w-full object-contain"
+                  />
+                ) : (
+                  <BottleSilhouette
+                    tint={familyStyle.tint}
+                    initial={initial}
+                    className="h-full w-full"
+                  />
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-display text-base font-semibold text-ink">
+                  {wine.name}
+                </p>
+                <p className="truncate text-xs text-muted">{wine.winery}</p>
+                <p className="mt-1 text-xs font-semibold" style={{ color: familyStyle.tint }}>
+                  {reason}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

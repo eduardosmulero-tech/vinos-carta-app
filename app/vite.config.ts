@@ -11,8 +11,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Vinos — Carta Digital',
-        short_name: 'Vinos',
+        name: 'Carta de Vinos — Condado de Huelva',
+        short_name: 'Carta de Vinos',
         description: 'Carta de vinos digital para restaurantes',
         lang: 'es',
         theme_color: '#73232d',
@@ -34,7 +34,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,jpg,jpeg}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,jpg,jpeg,webp,woff2}'],
         runtimeCaching: [
           {
             urlPattern: /^https?:\/\/.*/,
