@@ -1,21 +1,32 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import wines from '../data/wines';
 import SimilarWines from '../components/SimilarWines';
-import VineyardMotif from '../components/VineyardMotif';
-import BottleSilhouette from '../components/BottleSilhouette';
+import AndradeEmblem from '../components/AndradeEmblem';
+import SauciMotif from '../components/SauciMotif';
+import BottleStage from '../components/BottleStage';
+import Reveal from '../components/Reveal';
 import { getFamilyStyle } from '../lib/families';
+import { getWinePosition, formatPosition } from '../lib/catalog';
+import { getWinery } from '../data/wineries';
+
+const formatAlcohol = (a: number) => String(a).replace('.', ',');
 
 function WineDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const wine = wines.find((w) => w.id === id);
 
   if (!wine) {
     return (
-      <div className="px-4 py-16 text-center md:px-8 lg:px-16">
-        <p className="mb-6 text-lg">Vino no encontrado</p>
+      <div className="px-4 py-24 text-center md:px-8 lg:px-16">
+        <title>Vino no encontrado — Amén · Carta de Vinos</title>
+        <p className="font-display text-2xl text-cream">Vino no encontrado</p>
+        <p className="mt-2 text-sm text-muted-dark">
+          Puede que la referencia haya cambiado de carta.
+        </p>
         <Link
           to="/"
-          className="inline-block rounded border border-primary px-5 py-3 font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+          className="mt-8 inline-block rounded-[4px] border border-gold/50 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-cellar"
         >
           ← Volver a la carta
         </Link>
@@ -23,101 +34,207 @@ function WineDetail() {
     );
   }
 
-  const familyStyle = getFamilyStyle(wine.type);
-  const initial = wine.name.charAt(0).toUpperCase();
+  const { tint } = getFamilyStyle(wine.type, wine.family);
+  const pos = getWinePosition(wine.id);
+  const winery =
+    wine.winery === 'Bodegas Andrade' ? getWinery('andrade') : getWinery('sauci');
+  const isAndrade = wine.winery === 'Bodegas Andrade';
+
+  /* Navega a la carta filtrada SIN replace: atrás vuelve a esta ficha */
+  const handleMaridajeTap = (term: string) => {
+    navigate(`/?q=${encodeURIComponent(term)}`);
+  };
+
+  const fichaRows: Array<[string, React.ReactNode]> = [];
+  if (wine.grape) {
+    fichaRows.push([
+      'Uva',
+      <span key="v" className="font-display text-xl font-semibold text-primary">
+        {wine.grape}
+      </span>,
+    ]);
+  }
+  fichaRows.push(['D.O.', wine.region]);
+  if (wine.alcohol !== undefined) {
+    fichaRows.push([
+      'Graduación',
+      <span key="v" className="tabular">{formatAlcohol(wine.alcohol)}% vol</span>,
+    ]);
+  }
+  fichaRows.push(['Formato', wine.volume]);
+  if (wine.servicio) fichaRows.push(['Servicio', wine.servicio]);
 
   return (
-    <div className="px-4 py-6 md:px-8 lg:px-16">
+    <div className="px-4 pb-6 md:px-8 lg:px-16">
+      <title>{`${wine.name} — Amén · Carta de Vinos`}</title>
+
       <Link
         to="/"
         viewTransition
-        className="mb-6 inline-block text-sm font-semibold text-primary transition-colors hover:text-primary-dk"
+        className="mb-4 mt-4 inline-block text-sm font-semibold text-gold transition-colors hover:text-cream"
       >
         ← Volver a la carta
       </Link>
 
-      {/* Cabecera a ancho completo y centrada */}
-      <header className="relative overflow-hidden rounded-lg bg-surface py-10 text-center md:py-14">
-        <VineyardMotif className="pointer-events-none absolute inset-0 h-full w-full text-primary opacity-[0.07]" />
-        <div className="relative z-10">
-          <p className="eyebrow">{wine.winery}</p>
-          <h1 className="mx-auto mt-3 max-w-4xl font-display text-4xl font-semibold text-ink md:text-5xl">
-            {wine.name}
-          </h1>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-            <span
-              className="rounded px-3 py-1 text-sm font-semibold text-white"
-              style={{ backgroundColor: familyStyle.tint }}
-            >
-              {wine.type}
-            </span>
-            <span className="rounded border border-line bg-bg px-3 py-1 text-sm text-muted">
-              {wine.region}
-            </span>
-            <span className="rounded border border-line bg-bg px-3 py-1 text-sm text-muted">
-              {wine.volume}
-            </span>
-            <span className="rounded border border-primary/40 px-3 py-1 text-sm font-semibold text-primary">
-              UVA · {wine.grape.toUpperCase()}
-            </span>
-          </div>
-        </div>
-      </header>
+      {/* ── Hero: el nicho de la bodega, a sangre ── */}
+      <section className="-mx-4 md:-mx-8 lg:-mx-16">
+        <BottleStage
+          wineId={wine.id}
+          tint={tint}
+          binLabel={
+            pos ? `Nº ${String(pos.index).padStart(2, '0')} · ${pos.family.toUpperCase()}` : undefined
+          }
+          className="h-96 md:h-[28rem]"
+        >
+          <img
+            src={wine.image}
+            alt={`Botella de ${wine.name}`}
+            loading="eager"
+            fetchPriority="high"
+            sizes="(min-width: 768px) 400px, 280px"
+            className="stage-bottle h-80 w-auto object-contain md:h-96"
+            style={{ viewTransitionName: `bottle-${wine.id}` }}
+          />
+        </BottleStage>
+      </section>
 
-      {/* Cuerpo en columnas */}
-      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Botella */}
-        <div className="flex items-center justify-center rounded-lg bg-bg py-8">
-          {wine.image ? (
-            <img
-              src={wine.image}
-              alt={`Botella de ${wine.name}`}
-              className="h-80 w-auto object-contain drop-shadow-lg md:h-96"
-              style={{ viewTransitionName: `bottle-${wine.id}` }}
-            />
-          ) : (
-            <BottleSilhouette
-              tint={familyStyle.tint}
-              initial={initial}
-              className="h-72 w-auto md:h-80"
-            />
-          )}
-        </div>
-
-        {/* Ficha técnica */}
-        <div className="rounded-lg border border-line bg-surface p-6">
-          <h2 className="mb-4 font-display text-2xl font-semibold text-ink">Ficha técnica</h2>
-          <div className="divide-y divide-line">
-            <div className="flex items-center justify-between py-3">
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted">Uva</span>
-              <span className="font-display text-xl font-semibold text-primary">{wine.grape}</span>
-            </div>
-            <div className="flex items-center justify-between py-3">
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted">D.O.</span>
-              <span className="text-ink">{wine.region}</span>
-            </div>
-            <div className="flex items-center justify-between py-3">
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted">Graduación</span>
-              <span className="text-ink">{wine.alcohol}% vol</span>
-            </div>
-            <div className="flex items-center justify-between py-3">
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted">Formato</span>
-              <span className="text-ink">{wine.volume}</span>
-            </div>
-          </div>
-        </div>
+      {/* ── Nombre sobre la bodega ── */}
+      <div className="mt-7 text-center">
+        <p className="data-label text-[11px]" style={{ color: tint }}>
+          {wine.type}
+        </p>
+        <h1 className="mt-2 font-display text-4xl font-semibold text-cream md:text-5xl">
+          {wine.name}
+        </h1>
+        <p className="data-label mt-3 text-[10px] text-muted-dark">
+          {wine.winery.toUpperCase()}
+          {pos && <> · {formatPosition(pos)}</>}
+        </p>
       </div>
 
-      {/* Notas de cata */}
-      <section className="mt-10">
-        <div className="mb-4 flex items-center gap-4">
-          <h2 className="font-display text-2xl font-semibold text-ink">Notas de cata</h2>
-          <div className="flex-1 border-t border-line" />
-        </div>
-        <p className="max-w-3xl font-display text-lg italic leading-relaxed text-ink md:text-xl">
-          {wine.description}
-        </p>
-      </section>
+      {/* ── La carta impresa: ficha técnica + cata + maridaje sobre papel ── */}
+      <Reveal
+        as="section"
+        className="paper mx-auto mt-8 max-w-2xl rounded-[4px] px-6 py-8 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.9)] md:px-10 md:py-10"
+      >
+        <h2 className="data-label text-center text-[11px] text-primary">
+          Ficha técnica
+        </h2>
+        <div className="mx-auto mt-3 h-px w-16 bg-line" />
+
+        <dl className="mt-4 divide-y divide-line/60">
+          {fichaRows.map(([label, value]) => (
+            <div
+              key={label}
+              className="flex items-baseline justify-between gap-6 py-3"
+            >
+              <dt className="data-label shrink-0 text-[10px] text-muted">{label}</dt>
+              <dd className="text-right text-[15px] leading-snug text-ink">{value}</dd>
+            </div>
+          ))}
+          {wine.elaboracion && (
+            <div className="py-3">
+              <dt className="data-label text-[10px] text-muted">Elaboración</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-ink">
+                {wine.elaboracion}
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        {wine.cata && (
+          <>
+            <h2 className="data-label mt-10 text-center text-[11px] text-primary">
+              Notas de cata
+            </h2>
+            <div className="mx-auto mt-3 h-px w-16 bg-line" />
+            <div className="mt-6 space-y-6">
+              {(
+                [
+                  ['Vista', wine.cata.vista, true],
+                  ['Nariz', wine.cata.nariz, false],
+                  ['Boca', wine.cata.boca, false],
+                ] as const
+              ).map(([label, text, withCap]) => (
+                <div
+                  key={label}
+                  className="grid grid-cols-[64px_1fr] gap-4 md:grid-cols-[88px_1fr]"
+                >
+                  <span className="data-label pt-1.5 text-[10px] text-muted">
+                    {label}
+                  </span>
+                  <p
+                    className={`font-display text-lg italic leading-relaxed text-ink ${
+                      withCap ? 'drop-cap' : ''
+                    }`}
+                  >
+                    {text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {wine.maridaje && wine.maridaje.length > 0 && (
+          <>
+            <h2 className="data-label mt-10 text-center text-[11px] text-primary">
+              Maridaje
+            </h2>
+            <div className="mx-auto mt-3 h-px w-16 bg-line" />
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              {wine.maridaje.map((m) => (
+                <button
+                  key={m}
+                  onClick={() => handleMaridajeTap(m)}
+                  title={`Buscar vinos que maridan con ${m}`}
+                  className="rounded-full border border-primary/35 px-3.5 py-1.5 text-sm text-primary transition-colors hover:bg-primary hover:text-white active:bg-primary-dk"
+                >
+                  {m}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </Reveal>
+
+      {/* ── La bodega firma su vino ── */}
+      {winery && (
+        <Reveal as="section" className="relative mx-auto mt-14 max-w-2xl overflow-hidden text-center">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.07]">
+            {isAndrade ? (
+              <AndradeEmblem className="h-56 w-56" />
+            ) : (
+              <SauciMotif className="h-56 w-56" />
+            )}
+          </div>
+
+          <div className="relative">
+            {isAndrade ? (
+              <AndradeEmblem className="mx-auto h-16 w-16" color="#c9a26a" />
+            ) : winery.logo ? (
+              <img
+                src={winery.logo}
+                alt=""
+                aria-hidden="true"
+                className="mx-auto h-14 w-14 rounded-full object-cover ring-1 ring-gold/50"
+              />
+            ) : (
+              <SauciMotif className="mx-auto h-16 w-16" color="#c9a26a" />
+            )}
+
+            <p className="mt-4 font-display text-2xl font-semibold text-cream">
+              {winery.name}
+            </p>
+            <p className="data-label mt-2 text-[10px] text-gold">
+              {winery.lema}
+            </p>
+            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted-dark">
+              {winery.historia}
+            </p>
+          </div>
+        </Reveal>
+      )}
 
       <SimilarWines currentWine={wine} />
     </div>

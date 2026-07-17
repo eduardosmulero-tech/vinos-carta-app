@@ -11,12 +11,13 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Carta de Vinos — Condado de Huelva',
-        short_name: 'Carta de Vinos',
-        description: 'Carta de vinos digital para restaurantes',
+        name: 'Amén — Carta de Vinos',
+        short_name: 'Amén',
+        description:
+          'Carta de vinos de Amén Wines — Selección de Bodegas Andrade y Bodegas Sauci, D.O. Condado de Huelva',
         lang: 'es',
-        theme_color: '#73232d',
-        background_color: '#f2ebe5',
+        theme_color: '#160d10',
+        background_color: '#160d10',
         display: 'standalone',
         scope: '/',
         start_url: '/',

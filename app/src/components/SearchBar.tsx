@@ -1,35 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
-
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
 }
 
+/**
+ * Input totalmente controlado por el padre: UNA sola fuente de verdad.
+ * La fluidez al teclear la da useDeferredValue en WineList (React 19),
+ * no un debounce interno duplicado.
+ */
 function SearchBar({ value, onChange }: SearchBarProps) {
-  const [localValue, setLocalValue] = useState(value);
-  const onChangeRef = useRef(onChange);
-
-  onChangeRef.current = onChange;
-
-  useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onChangeRef.current(localValue);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [localValue]);
-
-  const handleClear = () => {
-    setLocalValue('');
-  };
-
   return (
-    <div className="relative">
+    <div className="relative mx-auto max-w-xl">
       <svg
-        className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted"
+        className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-dark"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -43,16 +26,18 @@ function SearchBar({ value, onChange }: SearchBarProps) {
         />
       </svg>
       <input
-        type="text"
-        value={localValue}
-        onChange={(e) => setLocalValue(e.target.value)}
-        placeholder="Buscar por nombre, bodega, tipo o uva…"
-        className="w-full rounded-lg border border-line bg-surface py-3 pl-10 pr-12 text-ink shadow-sm placeholder:text-muted/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        type="search"
+        enterKeyHint="search"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Buscar vino, uva o maridaje…"
+        aria-label="Buscar en la carta"
+        className="w-full rounded-[4px] border border-gold/30 bg-cellar-2 py-3 pl-10 pr-12 text-cream shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] placeholder:text-muted-dark/70 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/25 [&::-webkit-search-cancel-button]:hidden"
       />
-      {localValue && (
+      {value && (
         <button
-          onClick={handleClear}
-          className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-muted transition-colors hover:text-ink"
+          onClick={() => onChange('')}
+          className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-muted-dark transition-colors hover:text-cream"
           aria-label="Limpiar búsqueda"
         >
           ✕

@@ -1,2 +1,6 @@
 # Estado interno de herramientas de agente (no es contenido del proyecto)
 .commandcode/
+
+# Dependencias y artefactos de QA
+node_modules/
+tools/shots-v2/

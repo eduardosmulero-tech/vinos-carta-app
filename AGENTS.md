@@ -30,9 +30,11 @@
 
 ## ESTADO DEL PROYECTO
 
-**Fase:** demo COMPLETA (rediseño premium incluido), commiteada, pusheada y online en Vercel.
-Siguiente paso: **visita al cunado el sabado 18-jul** (demo por movil + decidir si se
-enseña el presupuesto).
+**Fase:** demo v3 COMPLETA — **RETO V3 "La Bodega"** ejecutado entero por Fable
+(18-jul madrugada, sesión autónoma con permiso de límite completo), tras el rechazo de
+la V2 por Edu (strike 2/3, "penoso, apenas cambió"). Commit de cierre hecho, **SIN push**.
+Siguiente paso: **Edu mira capturas/preview en su móvil → si OK, `git push` (redespliega
+Vercel) ANTES de la visita al cuñado de HOY sábado 18-jul.**
 
 ### Cerrado (ratificado por Edu + Fable + cunado 15-jul)
 
@@ -130,7 +132,47 @@ enseña el presupuesto).
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (17-jul mañana · RETO V2: plan aprobado, ejecutar F0-F7 HOY)
+### 🚦 EMPIEZA POR AQUI (18-jul madrugada · RETO V3 "La Bodega" EJECUTADO — falta el OK de Edu y push)
+
+**Qué pasó esta noche:** Edu rechazó la V2 (strike 2/3) y dejó a Fable la noche entera con
+permiso de límite completo: "genera el reto v3 y ejecuta hasta terminar". Hecho.
+
+**El concepto (docs/RETO_V3_2026-07-18.md):** la app entera es ahora **la bodega** — entorno
+oscuro tinta-burgundy donde cada botella vive en su nicho iluminado con número de lucernario,
+y la información va en **paneles de papel crema** (la carta impresa: serifa, filetes,
+capitulares). El contraste papel↔bodega ES la tesis tradición⨯tecnología de Edu, visible en
+cada pantalla. Tercera voz tipográfica real: **IBM Plex Mono autoalojada** con cifras
+tabulares para todos los datos (graduación, numeración, etiquetas). Contradice a propósito el
+guardarraíl "sin modo oscuro global" del plan V2 — justificación en el doc §2 (ese guardarraíl
+produjo dos strikes; lo único que Edu validó en V2 fueron las botellas sobre fondo oscuro).
+
+**Cobertura:** los 44 errores de `docs/AUDITORIA_UNICA_RETO_V2_2026-07-17.md` están cubiertos
+(mapa en RETO_V3 §5). Claves: cero prosa inventada (campo `description` ELIMINADO del modelo;
+los 4 vinos solo-dosier muestran ficha técnica honesta, sin cata fingida); datos del dosier
+restaurados (Castillo 12%, Señorío 11%, Naranja Andrade = Generoso Dulce/Zalema con override
+visual de familia); **tarifas Sauci verificadas contra el PDF real: NO publican ni uva ni
+graduación** → las 9 graduaciones Sauci inventadas se retiraron, uvas Sauci = las de la web
+(aditivas), y `docs/CONTRADICCIONES_CATALOGO.md` reescrito (sus filas "tarifa: Zalema" eran
+falsas); chips sugeridos del buscador ELIMINADOS (orden verbal de Edu); header solo-sello
+centrado; reveals por IntersectionObserver (funcionan en Safari/Firefox, no solo Chrome);
+title dinámico React 19 + OG tags + theme-color + favicon sello Amén; ErrorBoundary;
+numeración estable por familia; maridaje→búsqueda sin `replace` (atrás vuelve a la ficha).
+
+**Verificación (método del strike, sin greps a ciegas):** `lint` 0 · `tsc -b` 0 · build verde
+(40 entradas precache, botellas+mono incluidas) · **render real puppeteer 7 vistas × 2
+viewports revisadas A OJO** (capturas en `tools/shots-v2/`) · **WCAG medido en vivo sobre la
+ficha: 36/36 PASS ≥4.5:1** (en V2 fallaban 5 de 10 combinaciones). El fondo crema-sobre-crema
+que causaba los fallos ya no existe: el oro vive sobre oscuro (8.1:1), el papel sobre bodega
+(16.2:1).
+
+**▶ PRIMER PASO DE EDU AL DESPERTAR:**
+1. Mirar las capturas de `tools/shots-v2/` (o `npm run preview` + móvil).
+2. Si OK → `git push` (redespliega Vercel; la URL pública AÚN sirve la V2 rechazada).
+3. Si no OK → strike 3; el mapa de daño está en los docs de auditoría y el concepto en RETO_V3.
+
+---
+
+### 🚦 Historial RETO V2 (17-jul, superseded por V3)
 
 **El rediseño `657980a` fue RECHAZADO por Edu (17-jul): no supera su reto** ("sensación
 premium, parecer portfolio, no parecer generada de un prompt, lucirse con el stack, no te
@@ -274,6 +316,8 @@ de estudiante mostrado en privado; si se quisiera cerrar del todo habria que met
   | 5 · Diseno visual y responsive — paleta, espaciado | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
   | 6 · PWA y offline — service worker, manifest, iconos | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
   | 7 · Rediseño premium "La Carta del Sumiller" | ✅ **HECHA** (17-jul): tokens cálidos, Cormorant Garamond autoalojada, fotos de botellas extraídas del dosier, siluetas/ornamentos/motivo de viña SVG propios, tarjeta-etiqueta con tintas por familia, ficha técnica, View Transitions, entrada escalonada, ScrollToTop. Validado: lint + tsc + build verdes, preview 200. **Dos rondas de revisión (17-jul, Fable + Claude Code):** 1ª pasada de Kimi dejó el asset de Canva puesto en las 8 fichas (crítico) y el header descentrado en móvil (alto) — detectado por review de Fable. Corrección de Kimi solo arregló el header; las fotos quedaron con 6/8 ids compartiendo por error la misma foto (Castillo de Andrade) y 1/8 con un recorte de texto sin botella — detectado por Claude Code comparando texto de página (`extract_page_text.py`) contra cada imagen una a una. **Estado final tras la 2ª corrección (Claude Code):** las 8 fotos verificadas visualmente y mapeadas a su vino real; logo Sauci extraído y añadido a las cabeceras de sección; regresión de `text-muted-warm` (clase sin CSS generado, introducida al limpiar `index.css`) revertida a `text-muted` en 6 componentes; preload de fuente añadido; subpath muerto de `BottleSilhouette` eliminado. **Auditoria final de Fable (17-jul, 3ª ronda): PASS** — 8 fotos abiertas y verificadas una a una por el auditor, cobertura completa del mapa de familias, build verde; detalle de desviaciones menores aceptadas en el 🚦 de RETOMAR. Commit `657980a` pusheado con OK de Edu. |
+  | **RETO V3 · "La Bodega"** | ✅ **EJECUTADO (18-jul madrugada, Fable):** rediseño completo al entorno bodega-oscura + papel; datos veraces sin invención; mono autoalojada; 44 errores de auditoría cubiertos; WCAG 36/36 medido en render real. Detalle: `docs/RETO_V3_2026-07-18.md` y 🚦 de RETOMAR. **Pendiente: OK de Edu + push.** |
+  | RETO V2 · "La Carta del Sumiller" v2 (RECHAZADA por Edu — strike 2) | ✅ **HECHA (17-jul noche, Fable · F0-F7 completas):** ejecución completa de `docs/PLAN_RETO_V2_2026-07-17.md`. **F0:** 19 botellas con transparencia real (PIL flood-fill + crop + resize a 900px, webp RGBA), 16 fotos nuevas de Edu + 4 re-procesadas del dosier; logo renombrado a `logo-amen.jpg`; SVGs de marca (`AndradeEmblem` estrella 4 pétalos, `SauciMotif` velo de flor). **F1:** tipo `Wine` ampliado con `cata` (vista/nariz/boca), `maridaje`, `elaboracion`, `servicio`; `wineries.ts` con historia de ambas bodegas; `wines.ts` con 15 vinos enriquecidos desde `docs/INVESTIGACION_BODEGAS_2026-07-17.md` (los 4 solo-dosier conservan su ficha); `docs/CONTRADICCIONES_CATALOGO.md` con 6 discrepancias como munición para Edu. **F2:** `BottleStage.tsx` — panel oscuro con gradiente radial tinta→burgundy, viñeta, luz cenital, sombra elíptica, filete en tinta de familia, `viewTransitionName` para morph tarjeta→ficha. **F3:** navegación por familias — CSS `scroll-behavior: smooth`, barra sticky de chips con tintas, `IntersectionObserver` scroll-spy, lista reagrupada por familia con cabeceras centradas y sub-etiquetas de bodega. **F4:** ficha de sumiller — hero con `BottleStage` grande + nombre serifa + chips; ficha técnica ampliada (servicio, elaboración); cata en 3 bloques editoriales Vista·Nariz·Boca con drop cap; maridaje como chips navegables (tap → vuelve a la carta con `?q=`); franja de marca de bodega con emblema/logo, lema, historia y motivo de fondo; `SimilarWines` con fallback por familia (≥3 siempre) y mini-expositor. **F5:** buscador de sumiller — índice ampliado (nombre, bodega, tipo, uva, maridaje, cata); `useDeferredValue` (React 19) para teclear sin jank; chips de sugerencia ("ostras", "jamón", "chocolate"…); URL sync (`?q=`) para entrada desde maridaje; stagger SOLO en primer render (bug corregido). **F6:** editorial Amén — masthead con tagline "Vinos diferentes, historias únicas"; pie con Amén + "Selección de Bodegas Andrade y Bodegas Sauci"; PWA manifest "Amén — Carta de Vinos"; `reveal-up`/`reveal-fade` con `@supports (animation-timeline: view())` + fallback estático + `prefers-reduced-motion`; favicon y numeración editorial `01/19`. **F7:** PWA verificada — precache de webp/woff2 en `sw.js`; `lint` 0/0; `tsc -b` 0 errores; `npm run build` verde. **Bugs corregidos tras review:** maridaje chips rotos (WineList no leía `?q=`), stagger en cada filtro (no solo primer render), campos `imagenMarca`/`WineGroup`/`--accent` muertos eliminados. **Pendiente para F7 completo:** render real (puppeteer/Edge), contraste WCAG en expositor, capturas antes/después, OK de Edu en su móvil. |
 
   ```bash
   wsl -d Ubuntu -- bash -lc 'hermes kanban --board vinos-carta-app list'
@@ -316,7 +360,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. **RETO V2 (prioritario, HOY):** ejecutar `docs/PLAN_RETO_V2_2026-07-17.md` F0-F7 → ver 🚦 de arriba. El "PASS" del rediseño 657980a queda ANULADO por el rechazo de Edu
+1. **RETO V3 ✅ EJECUTADO Y COMMITEADO (18-jul madrugada):** ver 🚦 de arriba — queda OK de Edu + `git push` a Vercel (la URL pública aún sirve la V2 rechazada)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar

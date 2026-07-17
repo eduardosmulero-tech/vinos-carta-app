@@ -1,80 +1,90 @@
 import { Link } from 'react-router-dom';
 import type { Wine } from '../types';
 import { getFamilyStyle } from '../lib/families';
-import BottleSilhouette from './BottleSilhouette';
+import { getWinePosition } from '../lib/catalog';
+import BottleStage from './BottleStage';
 import Highlight from './Highlight';
 
 interface WineCardProps {
   wine: Wine;
-  showWinery?: boolean;
   searchQuery?: string;
 }
 
-function WineCard({ wine, showWinery = true, searchQuery = '' }: WineCardProps) {
-  const familyStyle = getFamilyStyle(wine.type);
-  const initial = wine.name.charAt(0).toUpperCase();
+const formatAlcohol = (a: number) => String(a).replace('.', ',');
+
+/**
+ * Nicho de bodega + etiqueta de papel. La tarjeta entera es el enlace
+ * (sin botón "Ver ficha" redundante). Solo muestra datos con fuente real.
+ */
+function WineCard({ wine, searchQuery = '' }: WineCardProps) {
+  const { tint } = getFamilyStyle(wine.type, wine.family);
+  const pos = getWinePosition(wine.id);
+
+  const dataRow = [
+    wine.grape?.toUpperCase(),
+    wine.alcohol !== undefined ? `${formatAlcohol(wine.alcohol)}% VOL` : undefined,
+    wine.volume.toUpperCase(),
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
+  const q = searchQuery.trim().toLowerCase();
+  const maridajeMatch = q
+    ? wine.maridaje?.find((m) => m.toLowerCase().includes(q))
+    : undefined;
 
   return (
     <Link
       to={`/wine/${wine.id}`}
       viewTransition
       aria-labelledby={`wine-name-${wine.id}`}
-      className="group block overflow-hidden rounded-lg border border-line bg-surface text-center shadow-sm transition-shadow hover:shadow-md active:scale-[0.99] active:shadow-none"
+      className="group block overflow-hidden rounded-[4px] shadow-[0_18px_40px_-18px_rgba(0,0,0,0.85)] ring-1 ring-white/5 transition-[box-shadow,ring-color] duration-300 hover:ring-gold/40 active:scale-[0.99]"
     >
-      {/* Filete superior en tinta de familia */}
-      <div className="h-0.5" style={{ backgroundColor: familyStyle.tint }} />
+      {/* Nicho iluminado */}
+      <BottleStage
+        wineId={wine.id}
+        tint={tint}
+        binLabel={pos ? `Nº ${String(pos.index).padStart(2, '0')}` : undefined}
+        className="h-52"
+      >
+        <img
+          src={wine.image}
+          alt={`Botella de ${wine.name}`}
+          loading="lazy"
+          className="stage-bottle h-44 w-auto object-contain"
+          style={{ viewTransitionName: `bottle-${wine.id}` }}
+        />
+      </BottleStage>
 
-      {/* Zona de imagen */}
-      <div className="flex h-48 items-center justify-center bg-bg px-4 py-5">
-        {wine.image ? (
-          <img
-            src={wine.image}
-            alt={`Botella de ${wine.name}`}
-            loading="lazy"
-            className="h-full w-auto object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
-            style={{ viewTransitionName: `bottle-${wine.id}` }}
-          />
-        ) : (
-          <BottleSilhouette
-            tint={familyStyle.tint}
-            initial={initial}
-            className="h-36 w-auto"
-          />
-        )}
-      </div>
-
-      {/* Contenido */}
-      <div className="p-5">
+      {/* Etiqueta de papel */}
+      <div className="paper px-4 pb-5 pt-4 text-center">
+        <p className="data-label text-[10px] text-muted">
+          <Highlight text={wine.winery.toUpperCase()} query={searchQuery.toUpperCase()} />
+        </p>
         <h3
           id={`wine-name-${wine.id}`}
-          className="font-display text-xl font-semibold leading-tight text-ink"
+          className="mt-1 font-display text-[1.4rem] font-semibold leading-tight text-ink"
         >
           <Highlight text={wine.name} query={searchQuery} />
         </h3>
+        <p className="mt-0.5 font-display text-sm italic text-muted">
+          <Highlight text={wine.type} query={searchQuery} />
+        </p>
 
-        {showWinery && (
-          <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-muted">
-            <Highlight text={wine.winery} query={searchQuery} />
+        <div className="mx-auto mt-3 h-px w-12 bg-line/70" />
+
+        {dataRow && (
+          <p className="data-label mt-3 text-[11px] text-ink/80">
+            <Highlight text={dataRow} query={searchQuery.toUpperCase()} />
           </p>
         )}
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-          <span
-            className="rounded px-2.5 py-1 text-xs font-semibold text-white"
-            style={{ backgroundColor: familyStyle.tint }}
-          >
-            <Highlight text={wine.type} query={searchQuery} />
-          </span>
-          <span className="rounded border border-primary/40 px-2.5 py-1 text-xs font-semibold text-primary">
-            UVA · <Highlight text={wine.grape.toUpperCase()} query={searchQuery.toUpperCase()} />
-          </span>
-        </div>
-
-        <div className="mt-5">
-          <span className="inline-flex min-h-11 items-center rounded border border-primary px-4 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white active:bg-primary-dk">
-            Ver ficha
-          </span>
-        </div>
+        {maridajeMatch && (
+          <p className="data-label mt-2 text-[10px] text-primary">
+            Marida con:{' '}
+            <Highlight text={maridajeMatch.toUpperCase()} query={searchQuery.toUpperCase()} />
+          </p>
+        )}
       </div>
     </Link>
   );

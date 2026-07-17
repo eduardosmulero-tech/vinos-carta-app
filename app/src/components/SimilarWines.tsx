@@ -2,15 +2,27 @@ import { Link } from 'react-router-dom';
 import type { Wine } from '../types';
 import wines from '../data/wines';
 import { getFamilyStyle } from '../lib/families';
-import BottleSilhouette from './BottleSilhouette';
+import BottleStage from './BottleStage';
+import Reveal from './Reveal';
 
 interface SimilarWinesProps {
   currentWine: Wine;
 }
 
+/**
+ * "En la misma estantería": recomendaciones con el porqué visible.
+ * En móvil es un estante horizontal con scroll (no una torre de nichos);
+ * en pantallas grandes, grid.
+ */
 function SimilarWines({ currentWine }: SimilarWinesProps) {
+  const currentFamily = getFamilyStyle(currentWine.type, currentWine.family);
+
+  /* 1º misma uva, 2º mismo tipo, 3º misma familia — nunca menos de 3 */
   let similar = wines.filter(
-    (w) => w.id !== currentWine.id && w.grape === currentWine.grape
+    (w) =>
+      w.id !== currentWine.id &&
+      w.grape !== undefined &&
+      w.grape === currentWine.grape
   );
 
   if (similar.length < 3) {
@@ -18,67 +30,69 @@ function SimilarWines({ currentWine }: SimilarWinesProps) {
       (w) =>
         w.id !== currentWine.id &&
         w.type === currentWine.type &&
-        !similar.find((s) => s.id === w.id)
+        !similar.some((s) => s.id === w.id)
     );
     similar = [...similar, ...byType];
   }
 
-  const displayed = similar.slice(0, 4);
-
-  if (displayed.length === 0) {
-    return null;
+  if (similar.length < 3) {
+    const byFamily = wines.filter(
+      (w) =>
+        w.id !== currentWine.id &&
+        getFamilyStyle(w.type, w.family).family === currentFamily.family &&
+        !similar.some((s) => s.id === w.id)
+    );
+    similar = [...similar, ...byFamily];
   }
 
+  const displayed = similar.slice(0, 4);
+  if (displayed.length === 0) return null;
+
   return (
-    <section className="mt-10 border-t border-line pt-8">
-      <h2 className="mb-4 font-display text-2xl font-semibold text-ink">Vinos similares</h2>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <Reveal as="section" className="mx-auto mt-14 max-w-5xl border-t border-gold/20 pt-10">
+      <h2 className="text-center font-display text-2xl font-semibold text-cream">
+        En la misma estantería
+      </h2>
+
+      <div className="shelf -mx-4 mt-7 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
         {displayed.map((wine) => {
-          const familyStyle = getFamilyStyle(wine.type);
+          const { tint } = getFamilyStyle(wine.type, wine.family);
           const reason =
-            wine.grape === currentWine.grape ? 'misma uva' : 'mismo tipo';
-          const initial = wine.name.charAt(0).toUpperCase();
+            wine.grape !== undefined && wine.grape === currentWine.grape
+              ? 'misma uva'
+              : wine.type === currentWine.type
+                ? 'mismo tipo'
+                : 'misma familia';
 
           return (
             <Link
               key={wine.id}
               to={`/wine/${wine.id}`}
               viewTransition
-              className="group flex items-center gap-3 overflow-hidden rounded-lg border border-line bg-surface p-3 transition-shadow hover:shadow-md active:scale-[0.99]"
+              className="group w-40 flex-shrink-0 snap-start overflow-hidden rounded-[4px] ring-1 ring-white/5 transition-shadow hover:ring-gold/40 active:scale-[0.99] sm:w-auto"
             >
-              <div
-                className="h-24 w-16 flex-shrink-0 rounded bg-bg p-1"
-                style={{ borderTop: `2px solid ${familyStyle.tint}` }}
-              >
-                {wine.image ? (
-                  <img
-                    src={wine.image}
-                    alt={`Botella de ${wine.name}`}
-                    loading="lazy"
-                    className="h-full w-full object-contain"
-                  />
-                ) : (
-                  <BottleSilhouette
-                    tint={familyStyle.tint}
-                    initial={initial}
-                    className="h-full w-full"
-                  />
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-display text-base font-semibold text-ink">
+              <BottleStage wineId={wine.id} tint={tint} className="h-36">
+                <img
+                  src={wine.image}
+                  alt={`Botella de ${wine.name}`}
+                  loading="lazy"
+                  className="stage-bottle h-28 w-auto object-contain"
+                />
+              </BottleStage>
+              <div className="paper px-3 py-3 text-center">
+                <p className="truncate font-display text-base font-semibold leading-tight text-ink">
                   {wine.name}
                 </p>
-                <p className="truncate text-xs text-muted">{wine.winery}</p>
-                <p className="mt-1 text-xs font-semibold" style={{ color: familyStyle.tint }}>
-                  {reason}
+                <p className="data-label mt-1.5 truncate text-[9px] text-muted">
+                  {wine.winery.toUpperCase()}
                 </p>
+                <p className="data-label mt-1 text-[9px] text-primary">{reason}</p>
               </div>
             </Link>
           );
         })}
       </div>
-    </section>
+    </Reveal>
   );
 }
 

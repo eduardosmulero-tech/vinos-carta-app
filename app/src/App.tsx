@@ -4,27 +4,33 @@ import WineList from './pages/WineList';
 import WineDetail from './pages/WineDetail';
 import ScrollToTop from './components/ScrollToTop';
 import Ornament from './components/Ornament';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex min-h-screen flex-col bg-bg font-sans text-ink">
+      <div className="flex min-h-screen flex-col bg-cellar font-sans text-cream">
         <Header />
         <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<WineList />} />
-            <Route path="/wine/:id" element={<WineDetail />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<WineList />} />
+              <Route path="/wine/:id" element={<WineDetail />} />
+            </Routes>
+          </ErrorBoundary>
         </main>
-        <footer className="mt-12 border-t border-line bg-surface py-8 text-center">
-          <div className="mx-auto max-w-xs px-4">
+        <footer className="mt-16 border-t border-gold/20 py-10 text-center">
+          <div className="mx-auto max-w-[180px] px-4">
             <Ornament className="w-full" />
           </div>
-          <p className="mt-3 font-display text-lg font-semibold text-ink">
-            Bodegas Andrade · Bodegas Sauci
+          <p className="mt-4 font-display text-xl font-semibold text-cream">
+            Amén Wines
           </p>
-          <p className="mt-1 text-xs uppercase tracking-widest text-muted">
-            Carta de formación para sala
+          <p className="data-label mt-3 text-[10px] text-muted-dark">
+            Selección de Bodegas Andrade y Bodegas Sauci
+          </p>
+          <p className="data-label mt-1.5 text-[10px] text-muted-dark/70">
+            D.O. Condado de Huelva
           </p>
         </footer>
         <ScrollToTop />
