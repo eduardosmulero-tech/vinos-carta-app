@@ -30,8 +30,9 @@
 
 ## ESTADO DEL PROYECTO
 
-**Fase:** descubrimiento completado — respuestas del cunado recibidas.
-Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos reales.**
+**Fase:** demo COMPLETA (rediseño premium incluido), commiteada, pusheada y online en Vercel.
+Siguiente paso: **visita al cunado el sabado 18-jul** (demo por movil + decidir si se
+enseña el presupuesto).
 
 ### Cerrado (ratificado por Edu + Fable + cunado 15-jul)
 
@@ -129,13 +130,24 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (17-jul noche · demo ONLINE, lista para enseñar)
+### 🚦 EMPIEZA POR AQUI (17-jul cierre · rediseño premium COMMITEADO y ONLINE)
 
-**La demo esta desplegada y online.** Repo publico en GitHub
-(`https://github.com/eduardosmulero-tech/vinos-carta-app`, root `app/`) importado en Vercel
-y desplegado por Edu — build Vite detectado automaticamente. Para el sabado 18-jul: Edu
-abre el link en su movil, se lo pasa al cunado, y este puede "Añadir a pantalla de inicio"
-(PWA instalable) igual que Edu. Sin friccion tecnica pendiente para esa demo.
+**La demo esta terminada al nivel del encargo premium, auditada por Fable y desplegada.**
+Commit `657980a` (rediseño F0-F7 completo, 51 archivos) pusheado a `master` → Vercel
+redespliega solo. Auditoria final de Fable (17-jul, esta sesion): las 8 fotos de botella
+verificadas UNA A UNA visualmente (unicas, correctas, 9-38 KB), 0 restos de `gray-*` y
+`muted-warm`, los 18 tipos de vino casan con el mapa de familias, lint + tsc + build
+verdes, precache PWA 26 entradas (webp + woff2 incluidos). Veredicto: **ENSEÑABLE 18-jul**.
+Desviaciones menores aceptadas (no bloquean): `castillo-de-andrade.webp` es detalle de
+etiqueta sobre fondo oscuro (unica imagen utilizable del PDF; si el cliente pasa foto de
+botella completa, se sustituye sin tocar codigo); `@font-face` vive en
+`/fonts/cormorant-garamond.css` (funcional, offline OK); enlace "Vino no encontrado" sin
+`viewTransition`; el stagger se relanza al buscar.
+
+Para el sabado 18-jul: Edu abre el link de Vercel en su movil, se lo pasa al cunado, y este
+puede "Añadir a pantalla de inicio" (PWA instalable). Check opcional de 2 min antes de la
+visita: URL de produccion en movil → ficha Andrade (botella que viaja), ficha Sauci
+(silueta tintada), buscar "zalema" (highlight + contador), y modo avion → recargar (offline).
 
 **Nota de exposicion:** la app muestra el logo/nombre real de Bodegas Andrade y datos de
 vino derivados de tarifas reales de Bodegas Sauci (`demo-data/`). La URL de Vercel es
@@ -239,7 +251,7 @@ de estudiante mostrado en privado; si se quisiera cerrar del todo habria que met
   | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA Y REVISADA** (16-jul CommandCode · 17-jul revision Fable: 1 fix doble-debounce) |
   | 5 · Diseno visual y responsive — paleta, espaciado | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
   | 6 · PWA y offline — service worker, manifest, iconos | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
-  | 7 · Rediseño premium "La Carta del Sumiller" | ✅ **HECHA** (17-jul): tokens cálidos, Cormorant Garamond autoalojada, fotos de botellas extraídas del dosier, siluetas/ornamentos/motivo de viña SVG propios, tarjeta-etiqueta con tintas por familia, ficha técnica, View Transitions, entrada escalonada, ScrollToTop. Validado: lint + tsc + build verdes, preview 200. **Dos rondas de revisión (17-jul, Fable + Claude Code):** 1ª pasada de Kimi dejó el asset de Canva puesto en las 8 fichas (crítico) y el header descentrado en móvil (alto) — detectado por review de Fable. Corrección de Kimi solo arregló el header; las fotos quedaron con 6/8 ids compartiendo por error la misma foto (Castillo de Andrade) y 1/8 con un recorte de texto sin botella — detectado por Claude Code comparando texto de página (`extract_page_text.py`) contra cada imagen una a una. **Estado final tras la 2ª corrección (Claude Code):** las 8 fotos verificadas visualmente y mapeadas a su vino real; logo Sauci extraído y añadido a las cabeceras de sección; regresión de `text-muted-warm` (clase sin CSS generado, introducida al limpiar `index.css`) revertida a `text-muted` en 6 componentes; preload de fuente añadido; subpath muerto de `BottleSilhouette` eliminado. |
+  | 7 · Rediseño premium "La Carta del Sumiller" | ✅ **HECHA** (17-jul): tokens cálidos, Cormorant Garamond autoalojada, fotos de botellas extraídas del dosier, siluetas/ornamentos/motivo de viña SVG propios, tarjeta-etiqueta con tintas por familia, ficha técnica, View Transitions, entrada escalonada, ScrollToTop. Validado: lint + tsc + build verdes, preview 200. **Dos rondas de revisión (17-jul, Fable + Claude Code):** 1ª pasada de Kimi dejó el asset de Canva puesto en las 8 fichas (crítico) y el header descentrado en móvil (alto) — detectado por review de Fable. Corrección de Kimi solo arregló el header; las fotos quedaron con 6/8 ids compartiendo por error la misma foto (Castillo de Andrade) y 1/8 con un recorte de texto sin botella — detectado por Claude Code comparando texto de página (`extract_page_text.py`) contra cada imagen una a una. **Estado final tras la 2ª corrección (Claude Code):** las 8 fotos verificadas visualmente y mapeadas a su vino real; logo Sauci extraído y añadido a las cabeceras de sección; regresión de `text-muted-warm` (clase sin CSS generado, introducida al limpiar `index.css`) revertida a `text-muted` en 6 componentes; preload de fuente añadido; subpath muerto de `BottleSilhouette` eliminado. **Auditoria final de Fable (17-jul, 3ª ronda): PASS** — 8 fotos abiertas y verificadas una a una por el auditor, cobertura completa del mapa de familias, build verde; detalle de desviaciones menores aceptadas en el 🚦 de RETOMAR. Commit `657980a` pusheado con OK de Edu. |
 
   ```bash
   wsl -d Ubuntu -- bash -lc 'hermes kanban --board vinos-carta-app list'
@@ -282,7 +294,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. ~~Implementar demo fase 6~~ ✅ HECHA (17-jul). ~~Desplegar online~~ ✅ HECHA (17-jul noche, GitHub + Vercel). **La demo está COMPLETA y ONLINE.** Queda opcional: check visual en navegador (installable + offline real)
+1. ~~Implementar demo~~ ~~desplegar~~ ~~rediseño premium~~ ✅ **TODO HECHO Y PUSHEADO** (17-jul, commit `657980a`; auditoria final Fable PASS). Queda opcional: check de 2 min en la URL de produccion (movil + offline real) antes de la visita
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
