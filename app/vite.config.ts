@@ -14,6 +14,7 @@ export default defineConfig({
         name: 'Vinos — Carta Digital',
         short_name: 'Vinos',
         description: 'Carta de vinos digital para restaurantes',
+        lang: 'es',
         theme_color: '#73232d',
         background_color: '#f2ebe5',
         display: 'standalone',
@@ -33,7 +34,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,jpg,jpeg}'],
         runtimeCaching: [
           {
             urlPattern: /^https?:\/\/.*/,

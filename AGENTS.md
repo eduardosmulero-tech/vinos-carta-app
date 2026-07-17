@@ -175,6 +175,25 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   custom + preview 200 en `/`, `/wine/niebla`, `/wine/test` + revisor hy3 read-only contra
   SPEC §5 y PLAN Fase 5 → VEREDICTO OK. Los checks visuales de viewport (375/768/1024) van
   por auditoría de clases, no render real — si algo se ve raro en la demo, mirar ahí primero.
+- **Fase 6 ✅ IMPLEMENTADA Y VERIFICADA (17-jul, Fable · revisor hy3 PENDIENTE por rate limit):**
+  PWA y offline. La config `VitePWA` completa ya estaba desde Fase 1; lo hecho ahora:
+  (1) `public/logo-192x192.png` y `logo-512x512.png` generados desde el logo real (1254×1254
+  cuadrado, System.Drawing bicúbico HQ; el 192 comprobado visualmente); (2) `favicon.svg`
+  REEMPLAZADO — el que había era el icono default de Vite (rayo morado), ahora burgundy
+  #73232d + "V" blanca según PLAN Fase 6; (3) criterio sobre la SPEC: `jpg,jpeg` añadidos a
+  `workbox.globPatterns` (sin eso el logo real NO se precacheaba para offline) y `lang: 'es'`
+  en el manifest (el plugin metía `"lang":"en"`). **Verificación Fable:** build verde
+  (`tsc -b` incluido) → `dist/sw.js` + `dist/manifest.webmanifest` con 12 entradas precacheadas
+  (logo jpg incluido) y todos los valores de SPEC §8.3; smoke preview 200 + MIME correcto en
+  `/`, `/wine/niebla`, manifest, sw.js, 2 iconos, favicon y logo jpg; registro del SW confirmado
+  en el bundle (`sw.js` + confirm de actualización + log offline). **Nota:** el plugin genera
+  `manifest.webmanifest`, no `manifest.json` como dice SPEC §1 — comportamiento estándar de
+  vite-plugin-pwa, no es defecto. Los checks de navegador del PLAN (installable en DevTools,
+  recarga offline real, Lighthouse) van por auditoría de artefactos, no browser real — si Edu
+  quiere el check visual, abrir preview y DevTools > Application. **Revisor hy3: NO corrido**
+  — Novita devolvió token rate limit 3 veces (17-jul); relanzarlo cuando el limite afloje
+  (prompt-contrato C1-C8 en el historial de sesión) o darlo por cubierto con la verificación
+  mecánica de arriba.
 - **Leccion delegacion (16-jul, ampliada 17-jul):** command-code sin `--yolo` NO escribe
   archivos; con `--yolo` desde Fable lo bloquea el clasificador → escrituras de hy3 =
   lanzarlas Edu con `!`, o Fable escribe directo si son <10 archivos pequeños ya
@@ -201,7 +220,7 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
   | 3 · Layout y routing — Header + React Router | ✅ **HECHA** (17-jul, Fable + revisor hy3 6/6 PASS + preview 200) |
   | 4 · Componentes — SearchBar, WineCard, WineList, WineDetail, SimilarWines | ✅ **HECHA Y REVISADA** (16-jul CommandCode · 17-jul revision Fable: 1 fix doble-debounce) |
   | 5 · Diseno visual y responsive — paleta, espaciado | ✅ **HECHA** (17-jul, Fable + revisor hy3 8/8 PASS) |
-  | 6 · PWA y offline — service worker, manifest, iconos | todo (plugin ya configurado; faltan iconos 192/512 + favicon) |
+  | 6 · PWA y offline — service worker, manifest, iconos | ✅ **HECHA** (17-jul, Fable; revisor hy3 pendiente por rate limit) |
 
   ```bash
   wsl -d Ubuntu -- bash -lc 'hermes kanban --board vinos-carta-app list'
@@ -230,9 +249,9 @@ Siguiente paso: **sesion de alcance final + horquilla de precio + demo con datos
 **Historial de sesiones: vive en `git log` y en los docs de referencia, no aqui.**
 Claves aun operativas de sesiones pasadas:
 
-- **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo. La demo
-  esta en construccion (Fases 1-5 ✅; falta 6: PWA/offline e iconos). Decidir
-  si acelerar fases 5-6 hoy 17-jul o ensenar solo el presupuesto → **[EDU, URGENTE]**.
+- **Sabado 18-jul (MAÑANA):** Edu ve al cunado en persona y queria ensenar la demo.
+  **La demo esta COMPLETA (Fases 1-6 ✅, 17-jul).** Para ensenarla: `cd app && npm run preview`
+  (o `npm run dev`). Queda a Edu decidir si la ensena ya o solo el presupuesto.
 - **D.1-D.6 cerradas** (detalle: tabla Cerrado arriba + `DESGLOSE_PRECIOS_D1.md` +
   `AUDITORIA_FABLE_RESPUESTA_2026-07-16.md`). Gestoria: semana del 20-jul (no bloquea).
 - Precio vigente: **cifra cerrada A 4.600 / B 5.050** (opciones −200 disenadora / −200 CSV
@@ -244,7 +263,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. Implementar demo fase 6 — PWA/offline, iconos 192/512 + favicon (la 5 ✅ 17-jul; flujo del 🚦: Fable directo o hy3 + verificacion Fable + revisor hy3)
+1. ~~Implementar demo fase 6~~ ✅ HECHA (17-jul). **La demo está COMPLETA (Fases 1-6).** Queda opcional: revisor hy3 de Fase 6 (bloqueado por rate limit de Novita) y check visual en navegador (installable + offline real)
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
