@@ -130,24 +130,46 @@ enseña el presupuesto).
 
 ## RETOMAR AQUI
 
-### 🚦 EMPIEZA POR AQUI (17-jul cierre · rediseño premium COMMITEADO y ONLINE)
+### 🚦 EMPIEZA POR AQUI (17-jul mañana · RETO V2: plan aprobado, ejecutar F0-F7 HOY)
 
-**La demo esta terminada al nivel del encargo premium, auditada por Fable y desplegada.**
-Commit `657980a` (rediseño F0-F7 completo, 51 archivos) pusheado a `master` → Vercel
-redespliega solo. Auditoria final de Fable (17-jul, esta sesion): las 8 fotos de botella
-verificadas UNA A UNA visualmente (unicas, correctas, 9-38 KB), 0 restos de `gray-*` y
-`muted-warm`, los 18 tipos de vino casan con el mapa de familias, lint + tsc + build
-verdes, precache PWA 26 entradas (webp + woff2 incluidos). Veredicto: **ENSEÑABLE 18-jul**.
-Desviaciones menores aceptadas (no bloquean): `castillo-de-andrade.webp` es detalle de
-etiqueta sobre fondo oscuro (unica imagen utilizable del PDF; si el cliente pasa foto de
-botella completa, se sustituye sin tocar codigo); `@font-face` vive en
-`/fonts/cormorant-garamond.css` (funcional, offline OK); enlace "Vino no encontrado" sin
-`viewTransition`; el stagger se relanza al buscar.
+**El rediseño `657980a` fue RECHAZADO por Edu (17-jul): no supera su reto** ("sensación
+premium, parecer portfolio, no parecer generada de un prompt, lucirse con el stack, no te
+cortes"). Strike 1/3 activo. Auditoría de esta sesión CON RENDER REAL: 4 de sus 8 notas
+quedaron a medias/mal (la de centrar títulos de bodega se reinterpretó sin preguntarle),
+~40% del stack aprovechado, verificación anterior fue por greps sin ojos. Lección
+persistida en memoria (`feedback_ui_render_real`).
 
-Para el sabado 18-jul: Edu abre el link de Vercel en su movil, se lo pasa al cunado, y este
-puede "Añadir a pantalla de inicio" (PWA instalable). Check opcional de 2 min antes de la
-visita: URL de produccion en movil → ficha Andrade (botella que viaja), ficha Sauci
-(silueta tintada), buscar "zalema" (highlight + contador), y modo avion → recargar (offline).
+**▶ SIGUIENTE PASO: ejecutar `docs/PLAN_RETO_V2_2026-07-17.md` (aprobado por Edu), fase
+a fase F0→F7.** Review previa del concepto por hy3:
+`docs/REVIEWS/REVIEW_HY3_PROPUESTA_RETO_2026-07-17.md` (clave: NADA de mix-blend-multiply
+sobre el expositor oscuro — transparencia real en assets).
+
+**Decisiones de Edu cerradas HOY (no re-litigar):**
+1. Catálogo = SOLO dosier Andrade + tarifas Sauci = **los 19 vinos actuales**. Amontillado
+   Sauci y Rosario Andrade (solo web) FUERA — no sabemos si Amén los distribuye.
+2. Buscador por maridaje/cata ("ostras" → vinos): **APROBADO**.
+3. Directrices de marca: tesis **tradición ⨯ tecnología**; realzar marca **AMÉN**
+   (¡hallazgo!: `app/public/logo-bodegas-andrade.jpg` es en realidad el logo AMEN WINES,
+   tagline "Vinos diferentes, historias únicas" → renombrar a `logo-amen.jpg`); marca de
+   cada bodega en las fichas de sus vinos; la app debe "saber venderse".
+4. Datos: material del cuñado MANDA sobre la web; datos web solo ADITIVOS; contradicciones
+   a `docs/CONTRADICCIONES_CATALOGO.md` (crear en F1), NUNCA a la UI.
+
+**Material nuevo:** `docs/INVESTIGACION_BODEGAS_2026-07-17.md` (catas/maridajes/historia
+reales de las webs oficiales, por Hermes) + 16 fotos en `demo-data/Imagenes aportadas por
+edu/` (12 Sauci + 4 Andrade HQ) → **los 19 vinos llevan botella real** tras F0. Los
+`*_check.py` sueltos en `demo-data/` son scripts de análisis de otra sesión (sin valor,
+ignorar).
+
+**Método OBLIGATORIO de esta ejecución (por el strike):** render real por fase
+(puppeteer-core + Edge headless, patrón validado; OJO: `msedge --screenshot` con ventana
+alta recorta el ancho — usar puppeteer), review hy3 read-only por fase (gratis, Fable lo
+lanza sin preguntar), assets verificados A OJO uno a uno, contraste WCAG medido, y capturas
+a Edu ANTES de dar nada por hecho. Edu pone la sesión en modo manual: escrituras de hy3
+(ej. transcripción wines.ts) las lanza él con `!`; commit solo con su OK.
+
+**La visita al cuñado sigue siendo MAÑANA sábado 18-jul** — la URL de Vercel redespliega
+al pushear. Presupuesto y resto de pendientes: sin cambios (ver Pendientes).
 
 **Nota de exposicion:** la app muestra el logo/nombre real de Bodegas Andrade y datos de
 vino derivados de tarifas reales de Bodegas Sauci (`demo-data/`). La URL de Vercel es
@@ -294,7 +316,7 @@ Claves aun operativas de sesiones pasadas:
 
 ### Pendientes
 
-1. ~~Implementar demo~~ ~~desplegar~~ ~~rediseño premium~~ ✅ **TODO HECHO Y PUSHEADO** (17-jul, commit `657980a`; auditoria final Fable PASS). Queda opcional: check de 2 min en la URL de produccion (movil + offline real) antes de la visita
+1. **RETO V2 (prioritario, HOY):** ejecutar `docs/PLAN_RETO_V2_2026-07-17.md` F0-F7 → ver 🚦 de arriba. El "PASS" del rediseño 657980a queda ANULADO por el rechazo de Edu
 2. Consulta gestoria con `docs/SPECS/CONSULTA_GESTORIA.md` (semana del 20-jul, antes de la 1ª factura) → **[EDU, en marcha]**
 3. Correcciones mecanicas de la auditoria (lista al final de AUDITORIA_FABLE_RESPUESTA) → **[delegable, desbloqueado]**
 4. [EDU] Presupuesto: rellenar nombre/empresa/fecha e imprimir a PDF + leer §6-§7 de DESGLOSE_PRECIOS_D1.md antes de presentar
