@@ -1,0 +1,12 @@
+# Estado interno de herramientas de agente (no es contenido del proyecto)
+.commandcode/
+
+# Dependencias y artefactos de QA
+node_modules/
+tools/shots-v2/
+
+# material de trabajo interno y de terceros: fuera del repo publico (9-nov-2026)
+demo-data/
+docs/ENTREGABLES/
+docs/SPECS/DESGLOSE_PRECIOS_D1.md
+docs/SPECS/MARCO_LEGAL.md
